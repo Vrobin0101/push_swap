@@ -12,6 +12,7 @@ LIB_PATH = ../libft/libft.a
 SOURCES = checker.c \
 		  push.c \
 		  swap.c \
+		  rotate.c \
 
 SRCS = $(addprefix $(SRC_PATH)/,$(SOURCES))
 OBJS = $(addprefix $(OBJ_PATH)/,$(SOURCES:.c=.o))

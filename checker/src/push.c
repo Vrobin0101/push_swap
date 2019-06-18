@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 02:46:07 by vrobin            #+#    #+#             */
-/*   Updated: 2019/06/13 05:52:20 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/06/18 03:21:36 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	push(int **dst, int **src, int *len_dst, int *len_src)
 		++*src;
 		*len_src -= 1;
 		*len_dst += 1;
-		free(*dst);
 		*dst = new_dst;
 	}
 }
