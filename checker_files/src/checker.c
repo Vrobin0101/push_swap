@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 02:54:49 by vrobin            #+#    #+#             */
-/*   Updated: 2019/06/18 04:41:39 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/06/18 05:53:13 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,20 @@ int		*fill_tab(char **av, int *tab, int nb)
 	i = 0;
 	while (i < nb)
 	{
+		if (!check_digits(av[i + 1]))
+			return (NULL);
+		i++;
+	}
+	i = 0;
+	while (i < nb)
+	{
+		if (ft_atoi(av[i + 1]) > INT_MAX || ft_atoi(av[i + 1]) < INT_MIN)
+			return (NULL);
 		tab[i] = ft_atoi(av[i + 1]);
 		i++;
 	}
+	if (!check_doublon(tab, nb))
+		return (NULL);
 	return (tab);
 }
 
@@ -67,7 +78,11 @@ int		main(int nb, char **av)
 	len1 = nb;
 	if (!(tab1 = (int*)malloc(sizeof(int) * nb)))
 		return (0);
-	tab1 = fill_tab(av, tab1, nb);
+	if (!(tab1 = fill_tab(av, tab1, nb)))
+	{
+		ft_putendl("Error");
+		return (-1);
+	}
 	show_tab(tab1, len1);
 	show_tab(tab2, len2);
 	str = ft_strnew(10);
@@ -96,14 +111,9 @@ int		main(int nb, char **av)
 		if (ft_strcmp(str, "rrr\n") == 0)
 			rrr(&tab1, &tab2, len1, len2);
 		if (ft_strcmp(str, "sha\n") == 0)
-			show_tab(tab1, len1);
+			ft_printf("%t", tab1, len1);
 		if (ft_strcmp(str, "shb\n") == 0)
-			show_tab(tab2, len2);
-		else
-		{
-			ft_putendl("Error");
-			return (-1);
-		}
+			ft_printf("%t", tab2, len2);
 	}
 	check(tab1, len1);
 	return (0);

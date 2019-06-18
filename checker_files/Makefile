@@ -13,6 +13,7 @@ SOURCES = checker.c \
 		  push.c \
 		  swap.c \
 		  rotate.c \
+		  check_numbers.c \
 
 SRCS = $(addprefix $(SRC_PATH)/,$(SOURCES))
 OBJS = $(addprefix $(OBJ_PATH)/,$(SOURCES:.c=.o))

@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   percent_conv.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/13 05:54:36 by vrobin            #+#    #+#             */
-/*   Updated: 2019/06/13 06:01:09 by vrobin           ###   ########.fr       */
+/*   Created: 2019/04/01 15:52:19 by vrobin            #+#    #+#             */
+/*   Updated: 2019/06/18 05:46:35 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/checker.h"
+#include "libft.h"
 
-int		*swap(int *tab, int len)
+size_t		percent_conv(va_list args, t_detail *detail, char *buff)
 {
-	int swap;
+	size_t		u;
+	char		*string;
 
-	if (len > 1)
-	{
-		swap = tab[0];
-		tab[0] = tab[1];
-		tab[1] = swap;
-	}
-	return (tab);
-}
-
-void	ss(int **tab_a, int **tab_b, int len_a, int len_b)
-{
-	*tab_a = swap(*tab_a, len_a);
-	*tab_b = swap(*tab_b, len_b);
+	string = "%";
+	(DET)->space = 0;
+	if ((DET)->precision == -1)
+		(DET)->precision = 0;
+	(DET)->strlen = ft_strlen(string);
+	buff = edit_ret(buff, string, detail);
+	u = ft_strlen(buff);
+	return (u);
 }

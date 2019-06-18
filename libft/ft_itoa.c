@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/11 11:30:00 by vrobin            #+#    #+#             */
-/*   Updated: 2019/06/13 02:05:44 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/06/18 05:35:29 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ static int		ft_intlen(long long n)
 	}
 	return (i);
 }
-
-#include <stdio.h>
 
 char			*ft_itoa(long long n)
 {

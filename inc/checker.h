@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 02:40:15 by vrobin            #+#    #+#             */
-/*   Updated: 2019/06/18 03:21:28 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/06/18 05:47:55 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 # define CHECKER_H
 #include "../libft/libft.h"
 #include <stdio.h>
+#include <limits.h>
 
+int		check_digits(char *str);
+int		check_doublon(int *tab, int len);
 void	show_tab(int *tab, int len);
 int		*swap(int *tab, int len);
 int		*rotate(int *tab, int len);

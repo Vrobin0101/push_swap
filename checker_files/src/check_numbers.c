@@ -1,38 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   check_numbers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/12 02:06:42 by vrobin            #+#    #+#             */
-/*   Updated: 2019/06/18 05:35:20 by vrobin           ###   ########.fr       */
+/*   Created: 2019/06/18 04:44:33 by vrobin            #+#    #+#             */
+/*   Updated: 2019/06/18 05:18:09 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../inc/checker.h"
 
-long int		ft_atoi(const char *str)
+int		check_digits(char *str)
 {
-	int			i;
-	int			negative;
-	long int	number;
+	int i;
 
 	i = 0;
-	negative = 1;
-	number = 0;
-	while (str[i] == ' ' || str[i] == '\f' || str[i] == '\t' || str[i] == '\n'
-	|| str[i] == '\r' || str[i] == '\v')
-		i++;
-	if (str[i] == '-')
-		negative = -1;
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while (str[i] >= '0' && str[i] <= '9')
+	while (str[i])
 	{
-		number *= 10;
-		number += str[i] - '0';
+		if (!ft_isdigit(str[i]))
+			return (0);
 		i++;
 	}
-	return (number * negative);
+	return (1);
+}
+
+int		check_doublon(int *tab, int len)
+{
+	int i;
+
+	i = 0;
+	while (i < len)
+	{
+		if (i + 1 < len)
+			if (tab[i + 1] == tab[i])
+				return (0);
+		i++;
+	}
+	return (1);
 }
