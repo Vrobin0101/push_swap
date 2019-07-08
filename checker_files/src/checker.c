@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 02:54:49 by vrobin            #+#    #+#             */
-/*   Updated: 2019/06/18 05:53:13 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/07/08 14:38:54 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		*fill_tab(char **av, int *tab, int nb)
 	return (tab);
 }
 
-void	check(int *tab, int len)
+void	checkn(int *tab, int len)
 {
 	int i;
 
@@ -70,8 +70,10 @@ int		main(int nb, char **av)
 	int		*tab2;
 	int		len1;
 	int		len2;
+	int		check;
 	char	*str;
 
+	check = 0;
 	len2 = 0;
 	tab2 = NULL;
 	nb -= 1;
@@ -86,35 +88,77 @@ int		main(int nb, char **av)
 	show_tab(tab1, len1);
 	show_tab(tab2, len2);
 	str = ft_strnew(10);
-	while (ft_strcmp(str, "\n") != 0)
+	while (read(0, str, 10) > 0)
 	{
-		str = ft_strnew(10);
-		read(0, str, 10);
+		check = 0;
 		if (ft_strcmp(str, "pa\n") == 0)
+		{
 			push(&tab1, &tab2, &len1, &len2);
+			check = 1;
+		}
 		if (ft_strcmp(str, "pb\n") == 0)
+		{
 			push(&tab2, &tab1, &len2, &len1);
+			check = 1;
+		}
 		if (ft_strcmp(str, "sa\n") == 0)
+		{
 			tab1 = swap(tab1, len1);
+			check = 1;
+		}
 		if (ft_strcmp(str, "sb\n") == 0)
+		{
 			tab2 = swap(tab2, len2);
+			check = 1;
+		}
 		if (ft_strcmp(str, "ra\n") == 0)
+		{
 			tab1 = rotate(tab1, len1);
+			check = 1;
+		}
 		if (ft_strcmp(str, "rb\n") == 0)
+		{
 			tab2 = rotate(tab2, len2);
+			check = 1;
+		}
 		if (ft_strcmp(str, "rr\n") == 0)
+		{
 			rr(&tab1, &tab2, len1, len2);
+			check = 1;
+		}
 		if (ft_strcmp(str, "rra\n") == 0)
+		{
 			tab1 = r_rotate(tab1, len1);
+			check = 1;
+		}
 		if (ft_strcmp(str, "rrb\n") == 0)
+		{
 			tab2 = r_rotate(tab2, len2);
+			check = 1;
+		}
 		if (ft_strcmp(str, "rrr\n") == 0)
+		{
 			rrr(&tab1, &tab2, len1, len2);
+			check = 1;
+		}
 		if (ft_strcmp(str, "sha\n") == 0)
+		{
 			ft_printf("%t", tab1, len1);
+			check = 1;
+		}
 		if (ft_strcmp(str, "shb\n") == 0)
+		{
 			ft_printf("%t", tab2, len2);
+			check = 1;
+		}
+		else if (check == 0)
+		{
+			ft_printf("Error\n");
+			return (0);
+		}
+		ft_strdel(&str);
+		str = ft_strnew(10);
 	}
-	check(tab1, len1);
+	checkn(tab1, len1);
 	return (0);
 }
