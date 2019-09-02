@@ -1,42 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_numbers.c                                    :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/18 04:44:33 by vrobin            #+#    #+#             */
-/*   Updated: 2019/06/18 05:18:09 by vrobin           ###   ########.fr       */
+/*   Created: 2019/07/08 12:51:18 by vrobin            #+#    #+#             */
+/*   Updated: 2019/09/02 16:48:44 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/checker.h"
+#include "../inc/checker.h"
 
-int		check_digits(char *str)
+int		main(int nb, char **av)
 {
-	int i;
+	int *tab;
+	int *bat;
+	int	len;
 
-	i = 0;
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]))
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int		check_doublon(int *tab, int len)
-{
-	int i;
-
-	i = 0;
-	while (i < len)
-	{
-		if (i + 1 < len)
-			if (tab[i + 1] == tab[i])
+	nb -= 1;
+	len = nb;
+	if (!(tab = (int*)malloc(sizeof(int) * nb)))
 				return (0);
-		i++;
-	}
-	return (1);
+	if (!(bat = (int*)malloc(sizeof(int) * nb)))
+				return (0);
+	tab = fill_tab(av, tab, nb);
+	bat = fill_tab(av, bat, nb);
+	algo(tab, len, bat);
 }

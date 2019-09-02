@@ -1,38 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   tab.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/08 12:51:18 by vrobin            #+#    #+#             */
-/*   Updated: 2019/07/18 04:32:02 by vrobin           ###   ########.fr       */
+/*   Created: 2019/09/02 14:18:21 by vrobin            #+#    #+#             */
+/*   Updated: 2019/09/02 14:18:43 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/checker.h"
 
-void		eswap(int *a, int *b)
-{
-	int c;
-
-	c = *a;
-	*a = *b;
-	*b = c;
-}
-
-int		checkn(int *tab, int len)
+void	show_tab(int *tab, int len)
 {
 	int i;
 
 	i = 0;
-	while (i < len - 1)
-	{
-		if (tab[i + 1] < tab[i])
-			return (0);
-		i++;
-	}
-	return (1);
+	ft_putchar('\n');
+	while (i < len)
+		ft_putendl(ft_itoa(tab[i++]));
+	ft_putchar('\n');
 }
 
 int		*fill_tab(char **av, int *tab, int nb)
@@ -42,31 +30,36 @@ int		*fill_tab(char **av, int *tab, int nb)
 	i = 0;
 	while (i < nb)
 	{
+		if (!check_digits(av[i + 1]))
+			return (NULL);
+		i++;
+	}
+	i = 0;
+	while (i < nb)
+	{
 		if (ft_atoi(av[i + 1]) > INT_MAX || ft_atoi(av[i + 1]) < INT_MIN)
 			return (NULL);
 		tab[i] = ft_atoi(av[i + 1]);
 		i++;
 	}
+	if (!check_doublon(tab, nb))
+		return (NULL);
 	return (tab);
 }
 
-//ft_printf("%t\n", tab, nb);
-
-int		main(int nb, char **av)
+void	checkn(int *tab, int len)
 {
-	int *tab;
-	int	len;
-	int pivot;
+	int i;
 
-	nb -= 1;
-	len = nb;
-	if (!(tab = (int*)malloc(sizeof(int) * nb)))
-				return (0);
-	tab = fill_tab(av, tab, nb);
-	pivot = len / 2;
-	len -= 1;
-	while (checkn(tab, nb) < 1)
+	i = 0;
+	while (i < len - 1)
 	{
-		eswap(&(tab[pivot]), &(tab[len]));
+		if (tab[i + 1] < tab[i])
+		{
+			ft_putendl("KO");
+			return ;
+		}
+		i++;
 	}
+	ft_putendl("OK");
 }
