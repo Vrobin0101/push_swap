@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 02:40:15 by vrobin            #+#    #+#             */
-/*   Updated: 2019/09/02 16:16:44 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/09/05 16:30:44 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ void	ss(int **tab_a, int **tab_b, int len_a, int len_b);
 void	push(int **dst, int **src, int *len_dst, int *len_src);
 void	show_tab(int *tab, int len);
 void	checkn(int *tab, int len);
-void	algo(int *tab, int len, int *bat);
+void	algo(int *tab, int len);
 #endif

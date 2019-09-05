@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 14:20:41 by vrobin            #+#    #+#             */
-/*   Updated: 2019/09/02 16:48:41 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/09/05 18:22:22 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,42 +66,121 @@ int				check_tab(int *tab1, int len1, int len2)
 	while (i + 1 < len1)
 	{
 		if (tab1[i] > tab1[i + 1])
-		{
 			return (0);
-		}
 		i++;
 	}
 	return (1);
 }
 
-void	algo(int *tab1, int len1, int *bat)
+int		*copy_tab(int *tab, int *bat, int len)
+{
+	int i;
+
+	i = 0;
+	while (i < len)
+	{
+		bat[i] = tab[i];
+		i++;
+	}
+	return (bat);
+}
+
+int		*b_move(int *tab, int len)
+{
+	if (len > 1)
+	{
+		if (tab[0] < tab[len - 1])
+		{
+			ft_printf("rb\n");
+			tab = rotate(tab, len);
+		}
+		if (tab[0] < tab[1])
+		{
+			ft_printf("sb\n");
+			tab = swap(tab, len);
+		}
+	}
+	return (tab);
+}
+
+int		*a_move(int *tab, int len)
+{
+	if (len > 1)
+	{
+		if (tab[0] > tab[1])
+			tab = swap(tab, len);
+	}
+	return (tab);
+}
+
+void	algo(int *tab1, int len1)
 {
 	int *tab2;
+	int *bat;
 	int len2;
 	int med;
+	int div;
 	int i;
 
 	tab2 = (int*)malloc(sizeof(int) * 1);
+	bat = (int*)malloc(sizeof(int) * len1);
 	len2 = 0;
 	i = 0;
+	bat = copy_tab(tab1, bat, len1);
 	bat = quicksort(bat, len1);
 	med = bat[len1 / 2];
-	printf("med = %d\n", med);
-	show_tab(tab1, len1);
-	while (check_tab(tab1, len1, len2) == 0)
+	div = len1 / 2;
+	while (len1 > 3)
 	{
-		if (tab1[0] > tab1[1])
+		while (div)
 		{
-			ft_putstr("sa\n");
-			swap(tab1, len1);
-			continue;
+			if (tab1[0] < med)
+			{
+				ft_putstr("pb\n");
+				push(&tab2, &tab1, &len2, &len1);
+				tab2 = b_move(tab2, len2);
+				div--;
+			}
+			else
+			{
+				ft_putstr("rra\n");
+				tab1 = r_rotate(tab1, len1);
+			}
 		}
-		if (tab1[0] > med)
-		{
-			ft_putstr("pb\n");
-			push(&tab2, &tab1, &len2, &len1);
-		}
+		bat = copy_tab(tab1, bat, len1);
+		bat = quicksort(bat, len1);
+		med = bat[len1 / 2];
+		div = len1 / 2;
 	}
-	printf("tab 1\n");
+	if (tab1[len1 - 1] < tab1[0] && tab1[0] > tab1[1])
+	{
+		ft_printf("ra\n");
+		tab1 = rotate(tab1, len1);
+	}
+	else if (tab1[len1 - 1] > tab1[0] && tab1[0] < tab1[1])
+	{
+		ft_printf("rra\n");
+		tab1 = r_rotate(tab1, len1);
+	}
+	else if (tab1[0] > tab1[1])
+	{
+		ft_printf("sa\n");
+		tab1 = swap(tab1, len1);
+	}
+	free(bat);
+	bat = (int*)malloc(sizeof(int) * len2);
+	bat = copy_tab(tab2, bat, len2);
+	bat = quicksort(bat, len2);
+	med = bat[len2 / 2];
+	div = len2 / 2;
+	while (len2)
+	{
+		ft_putstr("pa\n");
+		push(&tab1, &tab2, &len1, &len2);
+		tab1 = a_move(tab1, len1);
+	}
+	ft_printf("tab 1\n");
 	show_tab(tab1, len1);
+	ft_printf("tab 2\n");
+	show_tab(tab2, len2);
 }
