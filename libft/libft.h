@@ -6,20 +6,23 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 14:51:42 by spuisais          #+#    #+#             */
-/*   Updated: 2019/06/18 05:53:11 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/09/09 16:33:36 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# include "get_next_line.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
 # include <limits.h>
 # include <stdarg.h>
 # include <stdlib.h>
-# define DET detail
+# include <sys/types.h>
+# include <sys/uio.h>
 # define BUFF_SIZE 500
+# define DET detail
 
 typedef struct		s_detail
 {
@@ -141,6 +144,7 @@ size_t				bin_conv(va_list args, t_detail *detail, char *buff);
 size_t				percent_conv(va_list args, t_detail *detail, char *buff);
 size_t				get_fct(const char *format, va_list args, t_detail *detail);
 size_t				aff_number(char *buff, char *string, t_detail *detail);
+int					get_next_line(int fd, char **line);
 t_detail			*set_det(t_detail *detail);
 
 #endif

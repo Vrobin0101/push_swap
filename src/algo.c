@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 14:20:41 by vrobin            #+#    #+#             */
-/*   Updated: 2019/09/05 18:22:22 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/09/09 16:57:06 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,12 @@ int		*b_move(int *tab, int len)
 	{
 		if (tab[0] < tab[len - 1])
 		{
-			ft_printf("rb\n");
+			ft_putendl("rb");
 			tab = rotate(tab, len);
 		}
 		if (tab[0] < tab[1])
 		{
-			ft_printf("sb\n");
+			ft_putendl("sb");
 			tab = swap(tab, len);
 		}
 	}
@@ -107,8 +107,16 @@ int		*a_move(int *tab, int len)
 {
 	if (len > 1)
 	{
+		if (tab[0] > tab[len - 1])
+		{
+			ft_putendl("rra");
+			tab = r_rotate(tab, len);
+		}
 		if (tab[0] > tab[1])
+		{
+			ft_putendl("sa");
 			tab = swap(tab, len);
+		}
 	}
 	return (tab);
 }
@@ -122,6 +130,8 @@ void	algo(int *tab1, int len1)
 	int div;
 	int i;
 
+	if (check_tab(tab1, len1, 0) == 1)
+		return ;
 	tab2 = (int*)malloc(sizeof(int) * 1);
 	bat = (int*)malloc(sizeof(int) * len1);
 	len2 = 0;
@@ -136,14 +146,14 @@ void	algo(int *tab1, int len1)
 		{
 			if (tab1[0] < med)
 			{
-				ft_putstr("pb\n");
+				ft_putendl("pb");
 				push(&tab2, &tab1, &len2, &len1);
 				tab2 = b_move(tab2, len2);
 				div--;
 			}
 			else
 			{
-				ft_putstr("rra\n");
+				ft_putendl("rra");
 				tab1 = r_rotate(tab1, len1);
 			}
 		}
@@ -154,17 +164,17 @@ void	algo(int *tab1, int len1)
 	}
 	if (tab1[len1 - 1] < tab1[0] && tab1[0] > tab1[1])
 	{
-		ft_printf("ra\n");
+		ft_putendl("ra");
 		tab1 = rotate(tab1, len1);
 	}
 	else if (tab1[len1 - 1] > tab1[0] && tab1[0] < tab1[1])
 	{
-		ft_printf("rra\n");
+		ft_putendl("rra");
 		tab1 = r_rotate(tab1, len1);
 	}
-	else if (tab1[0] > tab1[1])
+	if (tab1[0] > tab1[1])
 	{
-		ft_printf("sa\n");
+		ft_putendl("sa");
 		tab1 = swap(tab1, len1);
 	}
 	free(bat);
@@ -173,14 +183,15 @@ void	algo(int *tab1, int len1)
 	bat = quicksort(bat, len2);
 	med = bat[len2 / 2];
 	div = len2 / 2;
+	tab1 = a_move(tab1, len1);
 	while (len2)
 	{
-		ft_putstr("pa\n");
+		ft_putendl("pa");
 		push(&tab1, &tab2, &len1, &len2);
 		tab1 = a_move(tab1, len1);
 	}
-	ft_printf("tab 1\n");
-	show_tab(tab1, len1);
-	ft_printf("tab 2\n");
-	show_tab(tab2, len2);
+	/*
+	   ft_printf("\ntab1");
+	   show_tab(tab1, len1);
+	   */
 }

@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 02:40:15 by vrobin            #+#    #+#             */
-/*   Updated: 2019/09/05 16:30:44 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/09/09 11:36:34 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 
 int		check_digits(char *str);
 int		check_doublon(int *tab, int len);
+int		*string_tab(char *str, int *tab, int *len);
 int		*swap(int *tab, int len);
 int		*rotate(int *tab, int len);
 int		*r_rotate(int *tab, int len);

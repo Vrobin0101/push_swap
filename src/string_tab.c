@@ -1,20 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   tab_string.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/12 02:06:50 by vrobin            #+#    #+#             */
-/*   Updated: 2019/09/09 16:37:52 by vrobin           ###   ########.fr       */
+/*   Created: 2019/09/09 11:35:19 by vrobin            #+#    #+#             */
+/*   Updated: 2019/09/09 11:35:51 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../inc/checker.h"
 
-void	ft_bzero(void *s, size_t n)
+int		*string_tab(char *str, int *tab, int *len)
 {
-	if (n == 0)
-		return ((void)0);
-	ft_memset(s, '\0', n);
+	char **split;
+	int	 i;
+
+	split = ft_strsplit(str, ' ');
+	i = 0;
+	while (split[i] != NULL)
+		i++;
+	*len = i;
+	if (!(tab = (int*)malloc(sizeof(int) * *len)))
+		return (0);
+	i = 0;
+	while (i < *len)
+	{
+		tab[i] = ft_atoi(split[i]);
+		i++;
+	}
+	return (tab);
 }

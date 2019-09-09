@@ -6,7 +6,7 @@
 #    By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/13 15:01:00 by spuisais          #+#    #+#              #
-#    Updated: 2019/06/18 05:46:16 by vrobin           ###   ########.fr        #
+#    Updated: 2019/09/09 16:29:26 by vrobin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,6 +94,7 @@ SRCS = ft_memset.c		\
 	   fill_float.c	 \
 	   check_float.c  \
 	   clear_buff.c	 \
+	   get_next_line.c \
 	   tab_i.c		 \
 
 OBJS = 	$(SRCS:.c=.o)
