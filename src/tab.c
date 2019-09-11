@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 14:18:21 by vrobin            #+#    #+#             */
-/*   Updated: 2019/09/02 14:18:43 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/09/11 10:09:47 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,17 @@ int		*fill_tab(char **av, int *tab, int nb)
 	return (tab);
 }
 
-void	checkn(int *tab, int len)
+void	checkn(int *tab, int len1, int len2)
 {
 	int i;
 
 	i = 0;
-	while (i < len - 1)
+	if (len2)
+	{
+		ft_putendl("KO");
+		return ;
+	}
+	while (i < len1 - 1)
 	{
 		if (tab[i + 1] < tab[i])
 		{

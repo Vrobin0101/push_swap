@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 02:54:49 by vrobin            #+#    #+#             */
-/*   Updated: 2019/09/09 16:45:15 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/09/11 10:42:36 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,6 @@ int		main(int nb, char **av)
 		}
 		ft_strdel(&str);
 	}
-	checkn(tab1, len1);
+	checkn(tab1, len1, len2);
 	return (0);
 }

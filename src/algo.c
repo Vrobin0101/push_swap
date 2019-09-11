@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 14:20:41 by vrobin            #+#    #+#             */
-/*   Updated: 2019/09/09 16:57:06 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/09/11 11:52:12 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,22 @@ void			trirapide(int *v, int gauche, int droit)
 	echanger(v, gauche, dernier);
 	trirapide(v, gauche, dernier - 1);
 	trirapide(v, dernier + 1, droit);
+}
+
+int		bol_check(int *tab, int len1, int len2)
+{
+	int i;
+
+	i = 0;
+	if (len2)
+		return (0);
+	while (i < len1 - 1)
+	{
+		if (tab[i + 1] < tab[i])
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 int				*quicksort(int *v, int i)
@@ -190,8 +206,6 @@ void	algo(int *tab1, int len1)
 		push(&tab1, &tab2, &len1, &len2);
 		tab1 = a_move(tab1, len1);
 	}
-	/*
-	   ft_printf("\ntab1");
-	   show_tab(tab1, len1);
-	   */
+	if (bol_check(tab1, len1, len2) != 1)
+		algo(tab1, len1);
 }
