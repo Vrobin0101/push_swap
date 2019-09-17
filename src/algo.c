@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 14:20:41 by vrobin            #+#    #+#             */
-/*   Updated: 2019/09/11 11:52:12 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/09/17 11:46:24 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,15 +137,17 @@ int		*a_move(int *tab, int len)
 	return (tab);
 }
 
-void	algo(int *tab1, int len1)
+void	algo(int *tab1, int len1, int *tab2, int len2)
 {
-	int *tab2;
 	int *bat;
-	int len2;
 	int med;
 	int div;
 	int i;
+	int check;
 
+	check = 0;
+	if (!tab2)
+		check = 1;
 	if (check_tab(tab1, len1, 0) == 1)
 		return ;
 	tab2 = (int*)malloc(sizeof(int) * 1);
@@ -207,5 +209,5 @@ void	algo(int *tab1, int len1)
 		tab1 = a_move(tab1, len1);
 	}
 	if (bol_check(tab1, len1, len2) != 1)
-		algo(tab1, len1);
+		algo(tab1, len1, tab2, len2);
 }

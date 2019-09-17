@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 02:54:49 by vrobin            #+#    #+#             */
-/*   Updated: 2019/09/11 10:42:36 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/09/17 10:37:43 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,24 @@ int		main(int nb, char **av)
 	check = 0;
 	tab2 = NULL;
 	len2 = 0;
+	if (nb == 1)
+		return (0);
 	if (nb == 2)
 	{
+		if (check_digits(av[1]) != 1)
+		{
+			ft_putendl("Error");
+			return (0);
+		}
 		if (!(tab1 = (int*)malloc(sizeof(int) * ft_strlen(av[1]))))
 			return (0);
-		tab1 = string_tab(av[1], tab1, &len1);
+		if (!(tab1 = string_tab(av[1], tab1, &len1)))
+			return (0);
+		if (check_doublon(tab1, len1) != 1)
+		{
+			ft_putendl("Error");
+			return (0);
+		}
 	}
 	else if (nb > 2)
 	{

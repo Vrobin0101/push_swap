@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 11:35:19 by vrobin            #+#    #+#             */
-/*   Updated: 2019/09/09 11:35:51 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/09/17 10:27:56 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int		*string_tab(char *str, int *tab, int *len)
 	while (i < *len)
 	{
 		tab[i] = ft_atoi(split[i]);
+		if (ft_atoi(split[i]) > INT_MAX || ft_atoi(split[i]) < INT_MIN)
+			return (NULL);
 		i++;
 	}
 	return (tab);

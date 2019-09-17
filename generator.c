@@ -4,16 +4,25 @@
 #include<time.h>
 int main(int ac, char **av)
 {
+	int u;
+
+	u = 1;
 	(void)ac;
 	int n=atoi(av[1]),i;
-	bool arr[10000]={0};
+	bool arr[1000000]={0};
 	time_t t;
 	srand((unsigned)time(&t));
 	for(i=0;i<n;++i)
 	{
-		int r=rand()%10000;
+		u++;
+		int r=rand()%1000000;
 		if(!arr[r])
-			printf("%d ",r);
+		{
+			if (u % 2 == 0)
+				printf("%d ",r);
+			else
+				printf("%d ",r * -1);
+		}
 		else
 			i--;
 		arr[r]=1;    
