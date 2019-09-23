@@ -19,8 +19,10 @@ SOURCES1 = checker.c \
 		  string_tab.c \
 
 SOURCES2 = push_swap.c \
+		   list.c \
 		  tab.c \
 		  push.c \
+		  remove_push.c \
 		  algo.c \
 		  swap.c \
 		  rotate.c \

@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 12:51:18 by vrobin            #+#    #+#             */
-/*   Updated: 2019/09/17 11:34:59 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/09/19 14:39:06 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ int		main(int nb, char **av)
 {
 	int *tab;
 	int	len;
+	t_string *string;
 
+	string = initialize_list("start");
 	len = 0;
 	if (nb == 2)
 	{
@@ -37,5 +39,5 @@ int		main(int nb, char **av)
 		ft_printf("Error\n");
 		return (0);
 	}
-	algo(tab, len, NULL, 0);
+	algo(tab, len, string);
 }
