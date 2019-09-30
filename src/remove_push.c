@@ -32,15 +32,6 @@ void	remove_push(t_string *list, int pb)
 	}
 	if (ft_strcmp(tmp->s, "pa") != 0)
 		return;
-	/*
-	printf("tmp vaut %s\n", tmp->s);
-	printf("tmp next vaut %s\n", tmp->next->s);
-	printf("tmp next next vaut %s\n", tmp->next->next->s);
-	printf("tmp next next next vaut %s\n", tmp->next->next->next->s);
-	printf("tmp next next next next vaut %s\n", tmp->next->next->next->next->s);
-	printf("tmp next next next next next vaut %s\n", tmp->next->next->next->next->next->s);
-	printf("tmp next next next next next next vaut %s\n", tmp->next->next->next->next->next->next->s);
-	*/
 	while (tmp->next != NULL)
 	{
 		tmp = tmp->next;

@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 02:40:15 by vrobin            #+#    #+#             */
-/*   Updated: 2019/09/20 11:58:59 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/09/30 17:12:01 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,16 @@ typedef struct	s_string
 	char		*s;
 	struct		s_string *next;
 }				t_string;
+typedef struct	s_stack
+{
+	int			*tab_a;
+	int			size_a;
+	int			*tab_b;
+	int			size_b;
+}				t_stack;
 t_string	create_list(char *p_s);
 t_string	*initialize_list(char *p_s);
+void	set_zero(t_stack *stack);
 void	free_list(t_string *to_delete);
 void	list_push_back(t_string *src, t_string *to_add);
 void	list_remove(t_string *src, size_t index);
@@ -38,12 +46,14 @@ int		*swap(int *tab, int len);
 int		*rotate(int *tab, int len);
 int		*r_rotate(int *tab, int len);
 int		*fill_tab(char **av, int *tab, int nb);
-int		med_ret(int *tab, int len);
+int		bol_check(int *tab, int len, int len2, int check);
+int		*quicksort(int *v, int i);
 void	rr(int **tab_a, int **tab_b, int len_a, int len_b);
 void	rrr(int **tab_a, int **tab_b, int len_a, int len_b);
 void	ss(int **tab_a, int **tab_b, int len_a, int len_b);
 void	push(int **dst, int **src, int *len_dst, int *len_src);
 void	show_tab(int *tab, int len);
 void	checkn(int *tab, int len1, int len2);
-void	algo(int *tab1, int len1, t_string *string);
+void	algo(t_stack *stack, t_string *string);
+void	finish_push(t_stack *stack, t_string *string);
 #endif

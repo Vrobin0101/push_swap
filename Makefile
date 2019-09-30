@@ -28,6 +28,7 @@ SOURCES2 = push_swap.c \
 		  rotate.c \
 		  check_numbers.c \
 		  string_tab.c \
+		  quick_sort.c \
 
 SRCS1 = $(addprefix $(SRC_PATH)/,$(SOURCES1))
 OBJS1 = $(addprefix $(OBJ_PATH)/,$(SOURCES1:.c=.o))

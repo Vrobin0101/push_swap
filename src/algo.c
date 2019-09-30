@@ -5,94 +5,61 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/02 14:20:41 by vrobin            #+#    #+#             */
-/*   Updated: 2019/09/20 12:34:24 by vrobin           ###   ########.fr       */
+/*   Created: 2019/09/30 13:40:52 by vrobin            #+#    #+#             */
+/*   Updated: 2019/09/30 17:11:43 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/checker.h"
 
-void	b_swap(int *a, int *b)
+void		three_sort_a(int *tab, int len, t_string *string)
 {
-	int c;
-
-	c = *a;
-	*a = *b;
-	*b = c;
-}
-void			echanger(int *v, int i, int j)
-{
-	int		temp;
-
-	temp = v[i];
-	v[i] = v[j];
-	v[j] = temp;
-}
-
-void			trirapide(int *v, int gauche, int droit)
-{
-	int		i;
-	int		dernier;
-
-	if (gauche >= droit)
-		return ;
-	echanger(v, gauche, (gauche + droit) / 2);
-	dernier = gauche;
-	i = gauche + 1;
-	while (i <= droit)
+	if (bol_check(tab, len, 0, 1) == 1)
+		return;
+	if (tab[0] > tab[1] && tab[0] < tab[2] && tab[1] < tab[2])
 	{
-		if (v[i] < v[gauche])
-			echanger(v, ++dernier, i);
-		i++;
+		list_push_back(string, initialize_list("sa"));
+		tab = swap(tab, len);
 	}
-	echanger(v, gauche, dernier);
-	trirapide(v, gauche, dernier - 1);
-	trirapide(v, dernier + 1, droit);
+	else if (tab[0] > tab[1] && tab[1] < tab[2] && tab[0] > tab[2])
+	{
+		list_push_back(string, initialize_list("ra"));
+		tab = rotate(tab, len);
+	}
+	else if (tab[0] < tab[1] && tab[1] > tab[2] && tab[2] < tab[0])
+	{
+		list_push_back(string, initialize_list("rra"));
+		tab = r_rotate(tab, len);
+	}
 }
 
-int		bol_check(int *tab, int len1, int len2)
+void		three_sort_b(int *tab, int len, t_string *string)
+{
+	if (bol_check(tab, len, 0, 0) == 1)
+		return;
+	if (tab[0] < tab[1] && tab[0] > tab[2] && tab[1] > tab[2])
+	{
+		list_push_back(string, initialize_list("sb"));
+		tab = swap(tab, len);
+	}
+	else if (tab[0] < tab[1] && tab[1] > tab[2] && tab[0] < tab[2])
+	{
+		list_push_back(string, initialize_list("rb"));
+		tab = rotate(tab, len);
+	}
+	else if (tab[0] > tab[1] && tab[1] < tab[2] && tab[2] > tab[0])
+	{
+		list_push_back(string, initialize_list("rrb"));
+		tab = r_rotate(tab, len);
+	}
+}
+
+int			*copy_tab(int *bat, int *tab, int len)
 {
 	int i;
 
 	i = 0;
-	if (len2)
-		return (0);
-	while (i < len1 - 1)
-	{
-		if (tab[i + 1] < tab[i])
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int				*quicksort(int *v, int i)
-{
-	trirapide(v, 0, i - 1);
-	return (v);
-}
-
-int				check_tab(int *tab1, int len1, int len2)
-{
-	int i;
-
-	i = 0;
-	if (len2)
-		return (0);
-	while (i + 1 < len1)
-	{
-		if (tab1[i] > tab1[i + 1])
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int		*copy_tab(int *tab, int *bat, int len)
-{
-	int i;
-
-	i = 0;
+	bat = (int*)malloc(sizeof(int) * len);
 	while (i < len)
 	{
 		bat[i] = tab[i];
@@ -101,105 +68,152 @@ int		*copy_tab(int *tab, int *bat, int len)
 	return (bat);
 }
 
-int		*b_move(int *tab, int len, t_string *list)
-{
-	if (len > 1)
-	{
-		if (tab[0] < tab[len - 1])
-		{
-			list_push_back(list, initialize_list("rb"));
-			tab = rotate(tab, len);
-		}
-		if (tab[0] < tab[1])
-		{
-			list_push_back(list, initialize_list("sb"));
-			tab = swap(tab, len);
-		}
-	}
-	return (tab);
-}
-
-int		*a_move(int *tab, int len, t_string *list)
-{
-	if (len > 1)
-	{
-		if (tab[0] > tab[len - 1])
-		{
-			list_push_back(list, initialize_list("rra"));
-			tab = r_rotate(tab, len);
-		}
-		if (tab[0] > tab[1])
-		{
-			list_push_back(list, initialize_list("sa"));
-			tab = swap(tab, len);
-		}
-	}
-	return (tab);
-}
-
-void	algo(int *tab1, int len1, t_string *list)
+int			get_med(int *tab, int len)
 {
 	int *bat;
 	int med;
-	int div;
-	int len2;
-	int *tab2;
-	int pa;
 
-	if (check_tab(tab1, len1, 0) == 1)
-		return ;
-	tab2 = (int*)malloc(sizeof(int) * 1);
-	bat = (int*)malloc(sizeof(int) * len1);
-	pa = 0;
-	len2 = 0;
-	bat = copy_tab(tab1, bat, len1);
-	bat = quicksort(bat, len1);
-	med = bat[len1 / 2];
-	div = len1 / 2;
-	while (len1 > 3)
+	bat = NULL;
+	bat = copy_tab(bat, tab, len);
+	bat = quicksort(bat, len);
+	med = bat[len / 2];
+	free(bat);
+	return (med);
+}
+
+int			max_value(int *tab, int len)
+{
+	int i;
+	int max;
+
+	i = 0;
+	max = 0;
+	while (i < len)
+	{
+		if (tab[i] > max)
+			max = tab[i];
+		i++;
+	}
+	i = 0;
+	while (i < len)
+	{
+		if (tab[i] == max)
+			break;
+		i++;
+	}
+	return (max);
+}
+
+int			get_path_a(int *tab, int len, int min)
+{
+	int i;
+
+	i = 0;
+	while (i < len)
+	{
+		if (tab[i] == min)
+			break;
+		i++;
+	}
+	if (i > len / 2)
+		return (len - i);
+	else
+		return (i);
+}
+
+int			get_path_b(int *tab, int len, int max)
+{
+	int i;
+
+	i = 0;
+	while (i < len)
+	{
+		if (tab[i] == max)
+			break;
+		i++;
+	}
+	if (i > len / 2)
+		return (i - len);
+	else
+		return (i);
+}
+
+void		algo(t_stack *stack, t_string *string)
+{
+	int med;
+	int div;
+
+	med = get_med(stack->tab_a, stack->size_a);
+	div = stack->size_a / 2;
+	while (stack->size_a >= 3)
 	{
 		while (div)
 		{
-			if (tab1[0] < med)
+			if (stack->tab_a[0] < med)
 			{
-				list_push_back(list, initialize_list("pb"));
-				push(&tab2, &tab1, &len2, &len1);
-				tab2 = b_move(tab2, len2, list);
+				list_push_back(string, initialize_list("pb"));
+				push(&stack->tab_b, &stack->tab_a, &stack->size_b, &stack->size_a);
 				div--;
 			}
 			else
 			{
-				list_push_back(list, initialize_list("rra"));
-				tab1 = r_rotate(tab1, len1);
+				list_push_back(string, initialize_list("ra"));
+				stack->tab_a = rotate(stack->tab_a, stack->size_a);
 			}
 		}
-		bat = copy_tab(tab1, bat, len1);
-		bat = quicksort(bat, len1);
-		med = bat[len1 / 2];
-		div = len1 / 2;
+		med = get_med(stack->tab_a, stack->size_a);
+		div = stack->size_a / 2;
 	}
-	free(bat);
-	bat = (int*)malloc(sizeof(int) * len2);
-	bat = copy_tab(tab2, bat, len2);
-	bat = quicksort(bat, len2);
-	med = bat[len2 / 2];
-	div = len2 / 2;
-	tab1 = a_move(tab1, len1, list);
-	while (len2)
+	if (stack->size_a == 2)
 	{
-		list_push_back(list, initialize_list("pa"));
-		pa++;
-		push(&tab1, &tab2, &len1, &len2);
-		tab1 = a_move(tab1, len1, list);
+		if (stack->tab_a[0] > stack->tab_a[1])
+		{
+			list_push_back(string, initialize_list("sa"));
+			stack->tab_a = swap(stack->tab_a, stack->size_a);
+		}
 	}
-	if (bol_check(tab1, len1, len2) != 1)
+	else if (stack->size_a == 3)
+		three_sort_a(stack->tab_a, stack->size_a, string);
+	finish_push(stack, string);
+}
+
+void	finish_push(t_stack *stack, t_string *string)
+{
+	int index;
+	int r;
+	int check;
+
+	index = 0;
+	check = 0;
+	while (stack->size_b)
 	{
-		remove_push(list, pa);
-		algo(tab1, len1, list);
+		check = 1;
+		index = max_value(stack->tab_b, stack->size_b);
+		if (stack->tab_b[0] != index)
+		{
+			r = get_path_b(stack->tab_b, stack->size_b, index);
+			if (r < 0)
+			{
+				while (r != 0)
+				{
+					list_push_back(string, initialize_list("rrb"));
+					stack->tab_b = r_rotate(stack->tab_b, stack->size_b);
+					r++;
+				}
+			}
+			else if (r > 0)
+			{
+				while (r != 0)
+				{
+					list_push_back(string, initialize_list("rb"));
+					stack->tab_b = rotate(stack->tab_b, stack->size_b);
+					r--;
+				}
+			}
+		}
+		list_push_back(string, initialize_list("pa"));
+		push(&stack->tab_a, &stack->tab_b, &stack->size_a, &stack->size_b);
 	}
-	else
-	{
-		remove_push(list, pa);
-		print_list(list);
-	}
+	//ft_printf("Pile A vaut \n%t\n", stack->tab_a, stack->size_a);
+	print_list(string);
 }

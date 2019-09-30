@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/02 14:18:21 by vrobin            #+#    #+#             */
-/*   Updated: 2019/09/17 10:37:15 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/09/30 14:55:56 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,33 @@ void	checkn(int *tab, int len1, int len2)
 		i++;
 	}
 	ft_putendl("OK");
+}
+
+int		bol_check(int *tab, int len1, int len2, int check)
+{
+	int i;
+
+	i = 0;
+	if (check == 1)
+	{
+		if (len2)
+			return (0);
+		while (i < len1 - 1)
+		{
+			if (tab[i + 1] < tab[i])
+				return (0) ;
+			i++;
+		}
+		return (1);
+	}
+	else
+	{
+		while (i < len1 - 1)
+		{
+			if (tab[i + 1] > tab[i])
+				return (0) ;
+			i++;
+		}
+		return (1);
+	}
 }
