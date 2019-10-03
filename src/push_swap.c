@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 12:51:18 by vrobin            #+#    #+#             */
-/*   Updated: 2019/09/30 15:43:58 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/03 10:43:11 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@ int		main(int nb, char **av)
 {
 	t_string *string;
 	t_stack *stack;
+	t_chunk *chunk;
 
 	if (!(stack = (t_stack*)malloc(sizeof(t_stack))))
 		return (0);
 	set_zero(stack);
 	string = initialize_list("start");
+	chunk = initialize_chunk(0);
 	stack->size_a = 0;
 	if (nb == 2)
 	{
@@ -49,5 +51,5 @@ int		main(int nb, char **av)
 		ft_printf("Error\n");
 		return (0);
 	}
-	algo(stack, string);
+	algo(stack, string, chunk);
 }

@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 13:40:52 by vrobin            #+#    #+#             */
-/*   Updated: 2019/09/30 17:11:43 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/03 16:59:04 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		three_sort_a(int *tab, int len, t_string *string)
 
 void		three_sort_b(int *tab, int len, t_string *string)
 {
-	if (bol_check(tab, len, 0, 0) == 1)
+	if (tab[0] > tab[1] && tab[1] > tab[2] && tab[0] > tab[2])
 		return;
 	if (tab[0] < tab[1] && tab[0] > tab[2] && tab[1] > tab[2])
 	{
@@ -51,6 +51,13 @@ void		three_sort_b(int *tab, int len, t_string *string)
 	{
 		list_push_back(string, initialize_list("rrb"));
 		tab = r_rotate(tab, len);
+	}
+	else if (tab[0] < tab[1] && tab[1] < tab[2] && tab[0] < tab[2])
+	{
+		list_push_back(string, initialize_list("rb"));
+		tab = rotate(tab, len);
+		list_push_back(string, initialize_list("sb"));
+		tab = swap(tab, len);
 	}
 }
 
@@ -138,15 +145,26 @@ int			get_path_b(int *tab, int len, int max)
 		return (i);
 }
 
-void		algo(t_stack *stack, t_string *string)
+void	print_all(t_stack *stack, t_chunk *chunk)
+{
+	while (chunk->next != NULL)
+	{
+		ft_printf("\nPile B vaut \n%t\n", stack->tab_b, chunk->size);
+		stack->tab_b += chunk->size;
+		chunk = chunk->next;
+	}
+}
+
+void		algo(t_stack *stack, t_string *string, t_chunk *chunk)
 {
 	int med;
 	int div;
 
 	med = get_med(stack->tab_a, stack->size_a);
 	div = stack->size_a / 2;
-	while (stack->size_a >= 3)
+	while (stack->size_a > 3)
 	{
+		chunk_push_back(chunk, initialize_chunk(div));
 		while (div)
 		{
 			if (stack->tab_a[0] < med)
@@ -164,7 +182,9 @@ void		algo(t_stack *stack, t_string *string)
 		med = get_med(stack->tab_a, stack->size_a);
 		div = stack->size_a / 2;
 	}
-	if (stack->size_a == 2)
+	if (stack->size_a == 3)
+		three_sort_a(stack->tab_a, stack->size_a, string);
+	else if (stack->size_a == 2)
 	{
 		if (stack->tab_a[0] > stack->tab_a[1])
 		{
@@ -172,8 +192,8 @@ void		algo(t_stack *stack, t_string *string)
 			stack->tab_a = swap(stack->tab_a, stack->size_a);
 		}
 	}
-	else if (stack->size_a == 3)
-		three_sort_a(stack->tab_a, stack->size_a, string);
+	rev_chunk(&chunk);
+	print_all(stack, chunk);
 	finish_push(stack, string);
 }
 
@@ -192,7 +212,13 @@ void	finish_push(t_stack *stack, t_string *string)
 		if (stack->tab_b[0] != index)
 		{
 			r = get_path_b(stack->tab_b, stack->size_b, index);
-			if (r < 0)
+			if (r == 1)
+			{
+				list_push_back(string, initialize_list("sb"));
+				stack->tab_b = swap(stack->tab_b, stack->size_b);
+				r = 0;
+			}
+			else if (r < 0)
 			{
 				while (r != 0)
 				{
@@ -214,6 +240,5 @@ void	finish_push(t_stack *stack, t_string *string)
 		list_push_back(string, initialize_list("pa"));
 		push(&stack->tab_a, &stack->tab_b, &stack->size_a, &stack->size_b);
 	}
-	//ft_printf("Pile A vaut \n%t\n", stack->tab_a, stack->size_a);
 	print_list(string);
 }
