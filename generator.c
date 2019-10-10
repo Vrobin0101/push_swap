@@ -9,13 +9,13 @@ int main(int ac, char **av)
 	u = 1;
 	(void)ac;
 	int n=atoi(av[1]),i;
-	bool arr[1000000]={0};
+	bool arr[10]={0};
 	time_t t;
 	srand((unsigned)time(&t));
 	for(i=0;i<n;++i)
 	{
 		u++;
-		int r=rand()%100;
+		int r=rand()%10;
 		if(!arr[r])
 		{
 				printf("%d ",r );

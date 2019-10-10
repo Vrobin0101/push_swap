@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 14:17:01 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/03 16:52:20 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/09 14:02:06 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	print_list(t_string *src)
 	while (src != NULL)
 	{
 		if (i != 0)
-			ft_putendl(src->s);
+			ft_printf("%s\n", src->s);
 		src = src->next;
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 13:40:52 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/03 16:59:04 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/10 15:09:47 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ void		three_sort_a(int *tab, int len, t_string *string)
 	{
 		list_push_back(string, initialize_list("rra"));
 		tab = r_rotate(tab, len);
+	}
+	else if (tab[0] > tab[1] && tab[1] > tab[2] && tab[0] > tab[2])
+	{
+		list_push_back(string, initialize_list("ra"));
+		tab = rotate(tab, len);
+		list_push_back(string, initialize_list("sa"));
+		tab = swap(tab, len);
 	}
 }
 
@@ -86,6 +93,32 @@ int			get_med(int *tab, int len)
 	med = bat[len / 2];
 	free(bat);
 	return (med);
+}
+
+int			prev_max_value(int *tab, int len, int max)
+{
+	int i;
+	int prev_max;
+
+	i = 0;
+	prev_max = 0;
+	while (i < len)
+	{
+		if (tab[i] > prev_max)
+		{
+			if (tab[i] != max)
+				prev_max = tab[i];
+		}
+		i++;
+	}
+	i = 0;
+	return (prev_max);
+}
+
+void		show_all(t_stack *stack)
+{
+	ft_printf("Pile A vaut\n%t", stack->tab_a, stack->size_a);
+	ft_printf("Pile B vaut\n%t", stack->tab_b, stack->size_b);
 }
 
 int			max_value(int *tab, int len)
@@ -155,90 +188,133 @@ void	print_all(t_stack *stack, t_chunk *chunk)
 	}
 }
 
-void		algo(t_stack *stack, t_string *string, t_chunk *chunk)
+//ft_printf("med vaut %d, div vaut %d\n", med, div);
+
+int		quickswap_a(t_stack *stack, t_string *string, int len, int *r)
 {
 	int med;
 	int div;
+	int p;
 
-	med = get_med(stack->tab_a, stack->size_a);
-	div = stack->size_a / 2;
-	while (stack->size_a > 3)
+	p = 0;
+	med = get_med(stack->tab_a, len);
+	div = len / 2;
+	while (div)
 	{
-		chunk_push_back(chunk, initialize_chunk(div));
-		while (div)
+		if (stack->tab_a[0] < med)
 		{
-			if (stack->tab_a[0] < med)
+			list_push_back(string, initialize_list("pb"));
+			push(&stack->tab_b, &stack->tab_a, &stack->size_b, &stack->size_a);
+			p++;
+			div--;
+		}
+		else
+		{
+			list_push_back(string, initialize_list("ra"));
+			stack->tab_a = rotate(stack->tab_a, stack->size_a);
+			(*r)++;
+		}
+	}
+	return (p);
+}
+
+int		quickswap_b(t_stack *stack, t_string *string, int len, int *r)
+{
+	int med;
+	int div;
+	int p;
+
+	p = 0;
+	med = get_med(stack->tab_b, len);
+	div = len / 2;
+	while (div)
+	{
+		if (stack->tab_b[0] >= med)
+		{
+			list_push_back(string, initialize_list("pa"));
+			push(&stack->tab_a, &stack->tab_b, &stack->size_a, &stack->size_b);
+			p++;
+			div--;
+		}
+		else
+		{
+			list_push_back(string, initialize_list("rb"));
+			stack->tab_b = rotate(stack->tab_b, stack->size_b);
+			(*r)++;
+		}
+	}
+	return (p);
+}
+
+void		rotate_back(t_stack *stack, t_string *string, int *r, int check)
+{
+	if (check == 0 && bol_check(stack->tab_a, stack->size_a, 0, 1) == 0)
+	{
+		if (*r > stack->size_a / 2)
+		{
+			while (*r != 0)
 			{
-				list_push_back(string, initialize_list("pb"));
-				push(&stack->tab_b, &stack->tab_a, &stack->size_b, &stack->size_a);
-				div--;
+				list_push_back(string, initialize_list("rra"));
+				stack->tab_a = r_rotate(stack->tab_a, stack->size_a);
+				(*r)--;
 			}
-			else
+		}
+		else
+		{
+			while (*r != 0)
 			{
 				list_push_back(string, initialize_list("ra"));
 				stack->tab_a = rotate(stack->tab_a, stack->size_a);
+				(*r)--;
 			}
 		}
-		med = get_med(stack->tab_a, stack->size_a);
-		div = stack->size_a / 2;
 	}
-	if (stack->size_a == 3)
-		three_sort_a(stack->tab_a, stack->size_a, string);
-	else if (stack->size_a == 2)
+	else
 	{
-		if (stack->tab_a[0] > stack->tab_a[1])
+		if (*r > stack->size_b / 2)
 		{
-			list_push_back(string, initialize_list("sa"));
-			stack->tab_a = swap(stack->tab_a, stack->size_a);
+			while (*r != 0)
+			{
+				list_push_back(string, initialize_list("rrb"));
+				stack->tab_b = r_rotate(stack->tab_b, stack->size_b);
+				(*r)--;
+			}
+		}
+		else
+		{
+			while (*r != 0)
+			{
+				list_push_back(string, initialize_list("rb"));
+				stack->tab_b = rotate(stack->tab_b, stack->size_b);
+				(*r)--;
+			}
 		}
 	}
-	rev_chunk(&chunk);
-	print_all(stack, chunk);
-	finish_push(stack, string);
 }
 
-void	finish_push(t_stack *stack, t_string *string)
+void		algo(t_stack *stack, t_string *string, int size, int check)
 {
-	int index;
+	int p;
 	int r;
-	int check;
 
-	index = 0;
-	check = 0;
-	while (stack->size_b)
+	if (size == 1)
 	{
-		check = 1;
-		index = max_value(stack->tab_b, stack->size_b);
-		if (stack->tab_b[0] != index)
-		{
-			r = get_path_b(stack->tab_b, stack->size_b, index);
-			if (r == 1)
-			{
-				list_push_back(string, initialize_list("sb"));
-				stack->tab_b = swap(stack->tab_b, stack->size_b);
-				r = 0;
-			}
-			else if (r < 0)
-			{
-				while (r != 0)
-				{
-					list_push_back(string, initialize_list("rrb"));
-					stack->tab_b = r_rotate(stack->tab_b, stack->size_b);
-					r++;
-				}
-			}
-			else if (r > 0)
-			{
-				while (r != 0)
-				{
-					list_push_back(string, initialize_list("rb"));
-					stack->tab_b = rotate(stack->tab_b, stack->size_b);
-					r--;
-				}
-			}
-		}
 		list_push_back(string, initialize_list("pa"));
 		push(&stack->tab_a, &stack->tab_b, &stack->size_a, &stack->size_b);
+		return;
 	}
-	print_list(string);
+	if (check == 0)
+	{
+		p = quickswap_a(stack, string, size, &r);
+		if (r > 0)
+			rotate_back(stack, string, &r, check);
+		algo(stack, string, p, 1);
+	}
+	else
+	{
+		p = quickswap_b(stack, string, size, &r);
+		if (r > 0)
+			rotate_back(stack, string, &r, check);
+		algo(stack, string, stack->size_a - p, 0);
+	}
 }
