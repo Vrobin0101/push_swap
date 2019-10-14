@@ -50,6 +50,5 @@ int		main(int nb, char **av)
 		return (0);
 	}
 	algo(stack, string, stack->size_a, 0);
-	algo(stack, string, stack->size_b, 1);
 	print_list(string);
 }
