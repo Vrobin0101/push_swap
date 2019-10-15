@@ -6,11 +6,11 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 04:37:59 by vrobin            #+#    #+#             */
-/*   Updated: 2019/09/30 13:42:13 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/15 15:47:41 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/checker.h"
+#include "../../inc/checker.h"
 
 int		*rotate(int *tab, int len)
 {

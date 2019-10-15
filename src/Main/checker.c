@@ -6,11 +6,33 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 02:54:49 by vrobin            #+#    #+#             */
-/*   Updated: 2019/09/30 14:45:45 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/15 15:56:17 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/checker.h"
+#include "../../inc/checker.h"
+
+void	checker_end(int *tab, int len1, int len2)
+{
+	int i;
+
+	i = 0;
+	if (len2)
+	{
+		ft_putendl("KO");
+		return ;
+	}
+	while (i < len1 - 1)
+	{
+		if (tab[i + 1] < tab[i])
+		{
+			ft_putendl("KO");
+			return ;
+		}
+		i++;
+	}
+	ft_putendl("OK");
+}
 
 int		main(int nb, char **av)
 {
@@ -35,7 +57,7 @@ int		main(int nb, char **av)
 		}
 		if (!(tab1 = (int*)malloc(sizeof(int) * ft_strlen(av[1]))))
 			return (0);
-		if (!(tab1 = string_tab(av[1], tab1, &len1)))
+		if (!(tab1 = str_to_tab(av[1], tab1, &len1)))
 			return (0);
 		if (check_doublon(tab1, len1) != 1)
 		{
@@ -125,6 +147,6 @@ int		main(int nb, char **av)
 		}
 		ft_strdel(&str);
 	}
-	checkn(tab1, len1, len2);
+	checker_end(tab1, len1, len2);
 	return (0);
 }

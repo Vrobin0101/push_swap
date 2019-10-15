@@ -1,41 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_numbers.c                                    :+:      :+:    :+:   */
+/*   numbers_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/18 04:44:33 by vrobin            #+#    #+#             */
-/*   Updated: 2019/09/30 14:45:52 by vrobin           ###   ########.fr       */
+/*   Created: 2019/10/15 15:28:34 by vrobin            #+#    #+#             */
+/*   Updated: 2019/10/15 15:44:57 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/checker.h"
+#include "../../inc/checker.h"
 
 int		check_digits(char *str)
 {
 	int i;
-	int checker;
 
 	i = 0;
-	checker = 0;
 	if (str[i] == '\0')
 		return (0);
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]) && str[i] != ' ')
 			return (0);
-		if (ft_isdigit(str[i]))
-			checker = 1;
 		i++;
 	}
-	if (checker == 1)
-		return (1);
-	else
-		return (0);
+	return (1);
 }
 
-int		check_doublon(int *tab, int len)
+int		check_duplicate(int *tab, int len)
 {
 	int i;
 

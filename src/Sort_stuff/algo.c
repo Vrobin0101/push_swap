@@ -6,22 +6,22 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 13:40:52 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/10 15:09:47 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/15 15:51:57 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/checker.h"
+#include "../../inc/checker.h"
 
 void		three_sort_a(int *tab, int len, t_string *string)
 {
-	if (bol_check(tab, len, 0, 1) == 1)
+	if (bol_check(tab, len, 1) == 1)
 		return;
-	if (tab[0] > tab[1] && tab[0] < tab[2] && tab[1] < tab[2])
+	if (tab[0] > tab[1] && tab[1] < tab[2] && tab[0] < tab[2])
 	{
 		list_push_back(string, initialize_list("sa"));
 		tab = swap(tab, len);
 	}
-	else if (tab[0] > tab[1] && tab[1] < tab[2] && tab[0] > tab[2])
+	else if (tab[0] > tab[1] && tab[1] < tab[2] && tab[2] < tab[0])
 	{
 		list_push_back(string, initialize_list("ra"));
 		tab = rotate(tab, len);
@@ -31,7 +31,14 @@ void		three_sort_a(int *tab, int len, t_string *string)
 		list_push_back(string, initialize_list("rra"));
 		tab = r_rotate(tab, len);
 	}
-	else if (tab[0] > tab[1] && tab[1] > tab[2] && tab[0] > tab[2])
+	else if (tab[0] < tab[1] && tab[1] > tab[2] && tab[2] > tab[0])
+	{
+		list_push_back(string, initialize_list("rra"));
+		tab = r_rotate(tab, len);
+		list_push_back(string, initialize_list("sa"));
+		tab = swap(tab, len);
+	}
+	else if (bol_check(tab, len, 0) == 1)
 	{
 		list_push_back(string, initialize_list("ra"));
 		tab = rotate(tab, len);
@@ -42,14 +49,14 @@ void		three_sort_a(int *tab, int len, t_string *string)
 
 void		three_sort_b(int *tab, int len, t_string *string)
 {
-	if (tab[0] > tab[1] && tab[1] > tab[2] && tab[0] > tab[2])
+	if (bol_check(tab, len, 0) == 1)
 		return;
-	if (tab[0] < tab[1] && tab[0] > tab[2] && tab[1] > tab[2])
+	if (tab[0] < tab[1] && tab[1] > tab[2] && tab[0] > tab[2])
 	{
 		list_push_back(string, initialize_list("sb"));
 		tab = swap(tab, len);
 	}
-	else if (tab[0] < tab[1] && tab[1] > tab[2] && tab[0] < tab[2])
+	else if (tab[0] < tab[1] && tab[1] > tab[2] && tab[2] > tab[0])
 	{
 		list_push_back(string, initialize_list("rb"));
 		tab = rotate(tab, len);
@@ -59,7 +66,14 @@ void		three_sort_b(int *tab, int len, t_string *string)
 		list_push_back(string, initialize_list("rrb"));
 		tab = r_rotate(tab, len);
 	}
-	else if (tab[0] < tab[1] && tab[1] < tab[2] && tab[0] < tab[2])
+	else if (tab[0] > tab[1] && tab[1] < tab[2] && tab[2] < tab[0])
+	{
+		list_push_back(string, initialize_list("rrb"));
+		tab = r_rotate(tab, len);
+		list_push_back(string, initialize_list("sb"));
+		tab = swap(tab, len);
+	}
+	else if (bol_check(tab, len, 1) == 1)
 	{
 		list_push_back(string, initialize_list("rb"));
 		tab = rotate(tab, len);
@@ -93,12 +107,6 @@ int			get_med(int *tab, int len)
 	med = bat[len / 2];
 	free(bat);
 	return (med);
-}
-
-void		show_all(t_stack *stack)
-{
-	ft_printf("Pile A vaut\n%t", stack->tab_a, stack->size_a);
-	ft_printf("Pile B vaut\n%t", stack->tab_b, stack->size_b);
 }
 
 int		quickswap_a(t_stack *stack, t_string *string, int len, int *r)
@@ -202,22 +210,6 @@ void		rotate_back(t_stack *stack, t_string *string, int rr, int check)
 	}
 }
 
-void		check_swap(t_stack *stack, t_string *string, int check)
-{
-	if (check == 1)
-		if (stack->tab_a[0] > stack->tab_a[1])
-		{
-			stack->tab_a = swap(stack->tab_a, stack->size_a);
-			list_push_back(string, initialize_list("sa"));
-		}
-	if (check == 0)
-		if (stack->tab_a[1] > stack->tab_a[0])
-		{
-			stack->tab_b = swap(stack->tab_b, stack->size_b);
-			list_push_back(string, initialize_list("sb"));
-		}
-}
-
 void		algo(t_stack *stack, t_string *string, int size, int check)
 {
 	int p;
@@ -226,6 +218,33 @@ void		algo(t_stack *stack, t_string *string, int size, int check)
 	rot = 0;
 	if (size < 2)
 		return ;
+	if (size == 2)
+	{
+		if (check == 0 && stack->tab_a[0] > stack->tab_a[1])
+		{
+			stack->tab_a = swap(stack->tab_a, stack->size_a);
+			list_push_back(string, initialize_list("sa"));
+		}
+		if (check == 1 && stack->tab_b[0] < stack->tab_b[1])
+		{
+			stack->tab_b = swap(stack->tab_b, stack->size_b);
+			list_push_back(string, initialize_list("sb"));
+		}
+		return;
+	}
+	if (size == 3)
+	{
+		if (check == 0 && stack->size_a == 3)
+		{
+			three_sort_a(stack->tab_a, stack->size_a, string);
+			return;
+		}
+		if (check == 1 && stack->size_b == 3)
+		{
+			three_sort_b(stack->tab_b, stack->size_b, string);
+			return;
+		}
+	}
 	if (check == 0)
 		p = quickswap_a(stack, string, size, &rot);
 	else

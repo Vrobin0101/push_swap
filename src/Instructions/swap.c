@@ -6,11 +6,11 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 05:54:36 by vrobin            #+#    #+#             */
-/*   Updated: 2019/09/30 13:42:19 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/15 15:48:04 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/checker.h"
+#include "../../inc/checker.h"
 
 int		*swap(int *tab, int len)
 {

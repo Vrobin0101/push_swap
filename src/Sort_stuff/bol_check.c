@@ -1,40 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   bol_check.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/13 02:46:07 by vrobin            #+#    #+#             */
-/*   Updated: 2019/09/17 14:42:14 by vrobin           ###   ########.fr       */
+/*   Created: 2019/10/15 15:36:35 by vrobin            #+#    #+#             */
+/*   Updated: 2019/10/15 15:51:54 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/checker.h"
+#include "../../inc/checker.h"
 
-void	push(int **dst, int **src, int *len_dst, int *len_src)
+int		bol_check(int *tab, int len, int check)
 {
-	int	*new_dst;
-	int	i;
-	int j;
+	int i;
 
-	j = 0;
 	i = 0;
-	if (*len_src > 0)
+	if (check == 1)
 	{
-		new_dst = (int*)malloc(sizeof(int) * (*len_dst + 2));
-		new_dst[*len_dst + 1] = '\0';
-		new_dst[i] = *src[i];
-		i++;
-		while (j < *len_dst)
+		while (i < len - 1)
 		{
-			new_dst[i] = dst[0][j];
+			if (tab[i + 1] < tab[i])
+				return (0) ;
 			i++;
-			j++;
 		}
-		++*src;
-		*len_src -= 1;
-		*len_dst += 1;
-		*dst = new_dst;
+		return (1);
+	}
+	else
+	{
+		while (i < len - 1)
+		{
+			if (tab[i + 1] > tab[i])
+				return (0) ;
+			i++;
+		}
+		return (1);
 	}
 }

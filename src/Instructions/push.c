@@ -1,36 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tab_string.c                                       :+:      :+:    :+:   */
+/*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/09 11:35:19 by vrobin            #+#    #+#             */
-/*   Updated: 2019/09/30 13:42:17 by vrobin           ###   ########.fr       */
+/*   Created: 2019/06/13 02:46:07 by vrobin            #+#    #+#             */
+/*   Updated: 2019/10/15 15:47:37 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/checker.h"
+#include "../../inc/checker.h"
 
-int		*string_tab(char *str, int *tab, int *len)
+void	push(int **dst, int **src, int *len_dst, int *len_src)
 {
-	char **split;
-	int	 i;
+	int	*new_dst;
+	int	i;
+	int j;
 
-	split = ft_strsplit(str, ' ');
+	j = 0;
 	i = 0;
-	while (split[i] != NULL)
-		i++;
-	*len = i;
-	if (!(tab = (int*)malloc(sizeof(int) * *len)))
-		return (0);
-	i = 0;
-	while (i < *len)
+	if (*len_src > 0)
 	{
-		tab[i] = ft_atoi(split[i]);
-		if (ft_atoi(split[i]) > INT_MAX || ft_atoi(split[i]) < INT_MIN)
-			return (NULL);
+		new_dst = (int*)malloc(sizeof(int) * (*len_dst + 2));
+		new_dst[*len_dst + 1] = '\0';
+		new_dst[i] = *src[i];
 		i++;
+		while (j < *len_dst)
+		{
+			new_dst[i] = dst[0][j];
+			i++;
+			j++;
+		}
+		++*src;
+		*len_src -= 1;
+		*len_dst += 1;
+		*dst = new_dst;
 	}
-	return (tab);
 }
