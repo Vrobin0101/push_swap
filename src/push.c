@@ -6,11 +6,11 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 02:46:07 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/15 15:47:37 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/15 17:58:19 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/checker.h"
+#include "../inc/checker.h"
 
 void	push(int **dst, int **src, int *len_dst, int *len_src)
 {

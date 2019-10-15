@@ -6,30 +6,31 @@ CFLAGS = -Wall -Wextra -Werror
 
 HEADERS = inc/checker.h
 
-OBJ_DIR	= obj
+OBJ_PATH = obj
 LIB_PATH = libft/libft.a
+SRC_PATH = src
 
-SOURCES1 = Main/checker.c \
-		  Instructions/push.c \
-		  instructions/swap.c \
-		  Instructions/rotate.c \
-		  Instructions/show_tab.c \
-		  Tab_string_stuff/numbers_check.c \
-		  Tab_string_stuff/str_to_tab.c\
+SOURCES1 = checker.c \
+		  push.c \
+		  swap.c \
+		  rotate.c \
+		  show_tab.c \
+		  numbers_check.c \
+		  str_to_tab.c\
 
-SOURCES2 = Main/push_swap.c \
-		  Instructions/push.c \
-		  instructions/swap.c \
-		  Instructions/rotate.c \
-		  Instructions/show_tab.c \
-		  Tab_string_stuff/fill_string.c\
-		  Tab_string_stuff/numbers_check.c \
-		  Tab_string_stuff/str_to_tab.c\
-		  Tab_string_stuff/string_stuff.c\
-		  Sort_stuff/algo.c \
-		  Sort_stuff/bol_check.c \
-		  Sort_stuff/quick_sort.c \
-		  Sort_stuff/remove_instructions \
+SOURCES2 = push_swap.c \
+		  push.c \
+		  swap.c \
+		  rotate.c \
+		  show_tab.c \
+		  fill_string.c\
+		  numbers_check.c \
+		  str_to_tab.c\
+		  string_stuff.c\
+		  algo.c \
+		  bol_check.c \
+		  quick_sort.c \
+		  remove_instructions.c \
 
 SRCS1 = $(addprefix $(SRC_PATH)/,$(SOURCES1))
 OBJS1 = $(addprefix $(OBJ_PATH)/,$(SOURCES1:.c=.o))
@@ -62,3 +63,5 @@ fclean : clean
 	@rm -rf $(LIB_PATH)
 
 re : fclean all
+
+.PHONY = re fclean clean all

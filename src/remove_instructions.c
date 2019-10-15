@@ -6,11 +6,11 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 15:51:30 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/15 15:51:38 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/15 17:58:33 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/checker.h"
+#include "../inc/checker.h"
 
 int		remove_instructions(t_string *string)
 {

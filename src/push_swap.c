@@ -6,11 +6,11 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 12:51:18 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/15 15:57:25 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/15 17:58:24 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/checker.h"
+#include "../inc/checker.h"
 
 void	set_zero(t_stack *stack)
 {
@@ -29,7 +29,7 @@ int		main(int nb, char **av)
 	if (!(stack = (t_stack*)malloc(sizeof(t_stack))))
 		return (0);
 	set_zero(stack);
-	string = initialize_list("start");
+	string = initialize_string("start");
 	stack->size_a = 0;
 	if (nb == 2)
 	{
@@ -55,15 +55,15 @@ int		main(int nb, char **av)
 	if (stack->size_a == 3)
 	{
 		three_sort_a(stack->tab_a, stack->size_a, string);
-		print_list(string);
+		print_string(string);
 		return (0);
 	}
 	algo(stack, string, stack->size_a, 0);
 	i = 0;
 	while ((i = remove_instructions(string)) > 0)
 	{
-		list_remove(string, i);
-		list_remove(string, i);
+		string_remove(string, i);
+		string_remove(string, i);
 	}
-	print_list(string);
+	print_string(string);
 }

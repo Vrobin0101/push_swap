@@ -6,11 +6,11 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 15:29:20 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/15 15:45:02 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/15 17:58:49 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/checker.h"
+#include "../inc/checker.h"
 
 int		*str_to_tab(char *str, int *tab, int *len)
 {

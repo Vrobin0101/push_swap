@@ -6,11 +6,11 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 15:36:35 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/15 15:51:54 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/15 17:58:02 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/checker.h"
+#include "../inc/checker.h"
 
 int		bol_check(int *tab, int len, int check)
 {

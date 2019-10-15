@@ -6,11 +6,11 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 15:41:46 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/15 15:54:25 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/15 17:58:10 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/checker.h"
+#include "../inc/checker.h"
 
 t_string	create_string(char *p_s)
 {
@@ -28,7 +28,7 @@ t_string	*initialize_string(char *p_s)
 	if (!(result = (t_string*)malloc(sizeof(t_string))))
 		return (NULL);
 
-	*result = create_list(p_s);
+	*result = create_string(p_s);
 	return (result);
 }
 

@@ -6,11 +6,11 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 15:42:21 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/15 15:55:33 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/15 17:58:55 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/checker.h"
+#include "../inc/checker.h"
 
 void	free_string(t_string *to_delete)
 {
@@ -33,7 +33,7 @@ void	string_remove(t_string *src, size_t index)
 	tmp = src->next;
 	if (tmp->next != NULL)
 		tmp = tmp->next;
-	free_list(src->next);
+	free_string(src->next);
 	src->next = tmp;
 }
 
@@ -44,7 +44,7 @@ void	string_clear(t_string *to_clear)
 	while (to_clear != NULL)
 	{
 		tmp = to_clear->next;
-		free_list(to_clear);
+		free_string(to_clear);
 		to_clear = tmp;
 	}
 }

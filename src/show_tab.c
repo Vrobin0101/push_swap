@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   show_tab.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/13 05:54:36 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/15 15:48:04 by vrobin           ###   ########.fr       */
+/*   Created: 2019/10/15 15:33:44 by vrobin            #+#    #+#             */
+/*   Updated: 2019/10/15 17:58:42 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/checker.h"
+#include "../inc/checker.h"
 
-int		*swap(int *tab, int len)
+void	show_tab(int *tab, int len)
 {
-	int swap;
+	int i;
 
-	if (len > 1)
-	{
-		swap = tab[0];
-		tab[0] = tab[1];
-		tab[1] = swap;
-	}
-	return (tab);
-}
-
-void	ss(int **tab_a, int **tab_b, int len_a, int len_b)
-{
-	*tab_a = swap(*tab_a, len_a);
-	*tab_b = swap(*tab_b, len_b);
+	i = 0;
+	ft_putchar('\n');
+	while (i < len)
+		ft_putendl(ft_itoa(tab[i++]));
+	ft_putchar('\n');
 }

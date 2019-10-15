@@ -1,44 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   numbers_check.c                                    :+:      :+:    :+:   */
+/*   swap.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/15 15:28:34 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/15 15:44:57 by vrobin           ###   ########.fr       */
+/*   Created: 2019/06/13 05:54:36 by vrobin            #+#    #+#             */
+/*   Updated: 2019/10/15 17:59:01 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/checker.h"
+#include "../inc/checker.h"
 
-int		check_digits(char *str)
+int		*swap(int *tab, int len)
 {
-	int i;
+	int swap;
 
-	i = 0;
-	if (str[i] == '\0')
-		return (0);
-	while (str[i])
+	if (len > 1)
 	{
-		if (!ft_isdigit(str[i]) && str[i] != ' ')
-			return (0);
-		i++;
+		swap = tab[0];
+		tab[0] = tab[1];
+		tab[1] = swap;
 	}
-	return (1);
+	return (tab);
 }
 
-int		check_duplicate(int *tab, int len)
+void	ss(int **tab_a, int **tab_b, int len_a, int len_b)
 {
-	int i;
-
-	i = 0;
-	while (i < len)
-	{
-		if (i + 1 < len)
-			if (tab[i + 1] == tab[i] || tab[i] > INT_MAX || tab[i] < INT_MIN)
-				return (0);
-		i++;
-	}
-	return (1);
+	*tab_a = swap(*tab_a, len_a);
+	*tab_b = swap(*tab_b, len_b);
 }

@@ -6,11 +6,11 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 13:40:52 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/15 15:51:57 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/15 17:57:48 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/checker.h"
+#include "../inc/checker.h"
 
 void		three_sort_a(int *tab, int len, t_string *string)
 {
@@ -18,31 +18,31 @@ void		three_sort_a(int *tab, int len, t_string *string)
 		return;
 	if (tab[0] > tab[1] && tab[1] < tab[2] && tab[0] < tab[2])
 	{
-		list_push_back(string, initialize_list("sa"));
+		string_push_back(string, initialize_string("sa"));
 		tab = swap(tab, len);
 	}
 	else if (tab[0] > tab[1] && tab[1] < tab[2] && tab[2] < tab[0])
 	{
-		list_push_back(string, initialize_list("ra"));
+		string_push_back(string, initialize_string("ra"));
 		tab = rotate(tab, len);
 	}
 	else if (tab[0] < tab[1] && tab[1] > tab[2] && tab[2] < tab[0])
 	{
-		list_push_back(string, initialize_list("rra"));
+		string_push_back(string, initialize_string("rra"));
 		tab = r_rotate(tab, len);
 	}
 	else if (tab[0] < tab[1] && tab[1] > tab[2] && tab[2] > tab[0])
 	{
-		list_push_back(string, initialize_list("rra"));
+		string_push_back(string, initialize_string("rra"));
 		tab = r_rotate(tab, len);
-		list_push_back(string, initialize_list("sa"));
+		string_push_back(string, initialize_string("sa"));
 		tab = swap(tab, len);
 	}
 	else if (bol_check(tab, len, 0) == 1)
 	{
-		list_push_back(string, initialize_list("ra"));
+		string_push_back(string, initialize_string("ra"));
 		tab = rotate(tab, len);
-		list_push_back(string, initialize_list("sa"));
+		string_push_back(string, initialize_string("sa"));
 		tab = swap(tab, len);
 	}
 }
@@ -53,31 +53,31 @@ void		three_sort_b(int *tab, int len, t_string *string)
 		return;
 	if (tab[0] < tab[1] && tab[1] > tab[2] && tab[0] > tab[2])
 	{
-		list_push_back(string, initialize_list("sb"));
+		string_push_back(string, initialize_string("sb"));
 		tab = swap(tab, len);
 	}
 	else if (tab[0] < tab[1] && tab[1] > tab[2] && tab[2] > tab[0])
 	{
-		list_push_back(string, initialize_list("rb"));
+		string_push_back(string, initialize_string("rb"));
 		tab = rotate(tab, len);
 	}
 	else if (tab[0] > tab[1] && tab[1] < tab[2] && tab[2] > tab[0])
 	{
-		list_push_back(string, initialize_list("rrb"));
+		string_push_back(string, initialize_string("rrb"));
 		tab = r_rotate(tab, len);
 	}
 	else if (tab[0] > tab[1] && tab[1] < tab[2] && tab[2] < tab[0])
 	{
-		list_push_back(string, initialize_list("rrb"));
+		string_push_back(string, initialize_string("rrb"));
 		tab = r_rotate(tab, len);
-		list_push_back(string, initialize_list("sb"));
+		string_push_back(string, initialize_string("sb"));
 		tab = swap(tab, len);
 	}
 	else if (bol_check(tab, len, 1) == 1)
 	{
-		list_push_back(string, initialize_list("rb"));
+		string_push_back(string, initialize_string("rb"));
 		tab = rotate(tab, len);
-		list_push_back(string, initialize_list("sb"));
+		string_push_back(string, initialize_string("sb"));
 		tab = swap(tab, len);
 	}
 }
@@ -124,14 +124,14 @@ int		quickswap_a(t_stack *stack, t_string *string, int len, int *r)
 	{
 		if (stack->tab_a[0] < med)
 		{
-			list_push_back(string, initialize_list("pb"));
+			string_push_back(string, initialize_string("pb"));
 			push(&stack->tab_b, &stack->tab_a, &stack->size_b, &stack->size_a);
 			p++;
 			div--;
 		}
 		else
 		{
-			list_push_back(string, initialize_list("ra"));
+			string_push_back(string, initialize_string("ra"));
 			stack->tab_a = rotate(stack->tab_a, stack->size_a);
 			(*r)++;
 		}
@@ -155,14 +155,14 @@ int		quickswap_b(t_stack *stack, t_string *string, int len, int *r)
 	{
 		if (stack->tab_b[0] >= med)
 		{
-			list_push_back(string, initialize_list("pa"));
+			string_push_back(string, initialize_string("pa"));
 			push(&stack->tab_a, &stack->tab_b, &stack->size_a, &stack->size_b);
 			p++;
 			div--;
 		}
 		else
 		{
-			list_push_back(string, initialize_list("rb"));
+			string_push_back(string, initialize_string("rb"));
 			stack->tab_b = rotate(stack->tab_b, stack->size_b);
 			(*r)++;
 		}
@@ -183,12 +183,12 @@ void		rotate_back(t_stack *stack, t_string *string, int rr, int check)
 			if (check == 1)
 			{
 				stack->tab_b = rotate(stack->tab_b, stack->size_b);
-				list_push_back(string, initialize_list("rb"));
+				string_push_back(string, initialize_string("rb"));
 			}
 			else
 			{
 				stack->tab_a = rotate(stack->tab_a, stack->size_a);
-				list_push_back(string, initialize_list("ra"));
+				string_push_back(string, initialize_string("ra"));
 			}
 		}
 	}
@@ -199,12 +199,12 @@ void		rotate_back(t_stack *stack, t_string *string, int rr, int check)
 			if (check == 1)
 			{
 				stack->tab_b = r_rotate(stack->tab_b, stack->size_b);
-				list_push_back(string, initialize_list("rrb"));
+				string_push_back(string, initialize_string("rrb"));
 			}
 			else
 			{
 				stack->tab_a = r_rotate(stack->tab_a, stack->size_a);
-				list_push_back(string, initialize_list("rra"));
+				string_push_back(string, initialize_string("rra"));
 			}
 		}
 	}
@@ -223,12 +223,12 @@ void		algo(t_stack *stack, t_string *string, int size, int check)
 		if (check == 0 && stack->tab_a[0] > stack->tab_a[1])
 		{
 			stack->tab_a = swap(stack->tab_a, stack->size_a);
-			list_push_back(string, initialize_list("sa"));
+			string_push_back(string, initialize_string("sa"));
 		}
 		if (check == 1 && stack->tab_b[0] < stack->tab_b[1])
 		{
 			stack->tab_b = swap(stack->tab_b, stack->size_b);
-			list_push_back(string, initialize_list("sb"));
+			string_push_back(string, initialize_string("sb"));
 		}
 		return;
 	}
@@ -260,12 +260,12 @@ void		algo(t_stack *stack, t_string *string, int size, int check)
 	{
 		if (check == 0)
 		{
-			list_push_back(string, initialize_list("pa"));
+			string_push_back(string, initialize_string("pa"));
 			push(&stack->tab_a, &stack->tab_b, &stack->size_a, &stack->size_b);
 		}
 		else
 		{
-			list_push_back(string, initialize_list("pb"));
+			string_push_back(string, initialize_string("pb"));
 			push(&stack->tab_b, &stack->tab_a, &stack->size_b, &stack->size_a);
 		}
 		--p;

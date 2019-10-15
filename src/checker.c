@@ -6,11 +6,11 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 02:54:49 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/15 15:56:17 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/15 17:59:38 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/checker.h"
+#include "../inc/checker.h"
 
 void	checker_end(int *tab, int len1, int len2)
 {
@@ -59,7 +59,7 @@ int		main(int nb, char **av)
 			return (0);
 		if (!(tab1 = str_to_tab(av[1], tab1, &len1)))
 			return (0);
-		if (check_doublon(tab1, len1) != 1)
+		if (check_duplicate(tab1, len1) != 1)
 		{
 			ft_putendl("Error");
 			return (0);

@@ -6,11 +6,11 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 15:50:57 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/15 15:51:48 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/15 17:58:29 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/checker.h"
+#include "../inc/checker.h"
 
 void			echanger(int *v, int i, int j)
 {
