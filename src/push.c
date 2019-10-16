@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 02:46:07 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/15 17:58:19 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/16 09:08:48 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	push(int **dst, int **src, int *len_dst, int *len_src)
 	i = 0;
 	if (*len_src > 0)
 	{
-		new_dst = (int*)malloc(sizeof(int) * (*len_dst + 2));
+		if (!(new_dst = (int*)malloc(sizeof(int) * (*len_dst + 2))))
+			return ;
 		new_dst[*len_dst + 1] = '\0';
 		new_dst[i] = *src[i];
 		i++;

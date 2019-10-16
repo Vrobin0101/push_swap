@@ -17,6 +17,7 @@ SOURCES1 = checker.c \
 		  show_tab.c \
 		  numbers_check.c \
 		  str_to_tab.c\
+		  quick_sort.c \
 
 SOURCES2 = push_swap.c \
 		  push.c \
@@ -30,7 +31,9 @@ SOURCES2 = push_swap.c \
 		  algo.c \
 		  bol_check.c \
 		  quick_sort.c \
+		  three_sort.c \
 		  remove_instructions.c \
+		  quick_swap.c \
 
 SRCS1 = $(addprefix $(SRC_PATH)/,$(SOURCES1))
 OBJS1 = $(addprefix $(OBJ_PATH)/,$(SOURCES1:.c=.o))

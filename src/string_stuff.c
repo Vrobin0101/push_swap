@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 15:42:21 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/15 17:58:55 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/16 14:32:13 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	free_string(t_string *to_delete)
 
 void	string_remove(t_string *src, size_t index)
 {
-	size_t i;
-	t_string *tmp;
+	size_t		i;
+	t_string	*tmp;
 
 	i = 0;
 	while (src->next != NULL && index > i + 1)

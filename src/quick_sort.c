@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 15:50:57 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/15 17:58:29 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/16 11:41:29 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,32 @@ int				*quicksort(int *v, int i)
 {
 	trirapide(v, 0, i - 1);
 	return (v);
+}
+
+int				*copy_tab(int *bat, int *tab, int len)
+{
+	int i;
+
+	i = 0;
+	if (!(bat = (int*)malloc(sizeof(int) * len)))
+		return (0);
+	while (i < len)
+	{
+		bat[i] = tab[i];
+		i++;
+	}
+	return (bat);
+}
+
+int				get_med(int *tab, int len)
+{
+	int *bat;
+	int med;
+
+	bat = NULL;
+	bat = copy_tab(bat, tab, len);
+	bat = quicksort(bat, len);
+	med = bat[len / 2];
+	free(bat);
+	return (med);
 }

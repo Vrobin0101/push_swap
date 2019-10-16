@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 02:54:49 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/15 17:59:38 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/16 15:10:39 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,119 +34,84 @@ void	checker_end(int *tab, int len1, int len2)
 	ft_putendl("OK");
 }
 
+int		behavior_check(t_stack *stack)
+{
+	if (stack->tab_a == NULL)
+	{
+		ft_printf("Error\n");
+		return (0);
+	}
+	if (stack->size_a == 1)
+		return (0);
+	return (1);
+}
+
+int		parsing_first(t_stack *stack, char *str)
+{
+	if (ft_strcmp(str, "pa") == 0)
+		push(&stack->tab_a, &stack->tab_b, &stack->size_a, &stack->size_b);
+	else if (ft_strcmp(str, "pb") == 0)
+		push(&stack->tab_b, &stack->tab_a, &stack->size_b, &stack->size_a);
+	else if (ft_strcmp(str, "sa") == 0)
+		stack->tab_a = swap(stack->tab_a, stack->size_a);
+	else if (ft_strcmp(str, "sb") == 0)
+		stack->tab_b = swap(stack->tab_b, stack->size_b);
+	else if (ft_strcmp(str, "ss") == 0)
+		ss(&stack->tab_a, &stack->tab_b, stack->size_a, stack->size_b);
+	else if (ft_strcmp(str, "ra") == 0)
+		stack->tab_a = rotate(stack->tab_a, stack->size_a);
+	else if (ft_strcmp(str, "rb") == 0)
+		stack->tab_b = rotate(stack->tab_b, stack->size_b);
+	else if (ft_strcmp(str, "rra") == 0)
+		stack->tab_a = r_rotate(stack->tab_a, stack->size_a);
+	else if (ft_strcmp(str, "rrb") == 0)
+		stack->tab_b = r_rotate(stack->tab_b, stack->size_b);
+	else
+		return (0);
+	return (1);
+}
+
+int		parsing_second(t_stack *stack, char *str)
+{
+	if (ft_strcmp(str, "rrr") == 0)
+		rrr(&stack->tab_a, &stack->tab_b, stack->size_a, stack->size_b);
+	else if (ft_strcmp(str, "rr") == 0)
+		rr(&stack->tab_a, &stack->tab_b, stack->size_a, stack->size_b);
+	else if (ft_strcmp(str, "sha") == 0)
+		show_tab(stack->tab_a, stack->size_a, 1);
+	else if (ft_strcmp(str, "shb") == 0)
+		show_tab(stack->tab_b, stack->size_b, 0);
+	else if (ft_strcmp(str, "shh") == 0)
+		show_all(stack->tab_a, stack->tab_b, stack->size_a, stack->size_b);
+	else
+		return (0);
+	return (1);
+}
+
 int		main(int nb, char **av)
 {
-	int		*tab1;
-	int		*tab2;
-	int		len1;
-	int		len2;
+	t_stack *stack;
 	int		check;
 	char	*str;
 
-	check = 0;
-	tab2 = NULL;
-	len2 = 0;
-	if (nb == 1)
+	if (!(stack = (t_stack*)malloc(sizeof(t_stack))))
 		return (0);
-	if (nb == 2)
+	set_zero(stack);
+	check = 0;
+	convert_num(stack, av, nb);
+	if (!behavior_check(stack))
 	{
-		if (check_digits(av[1]) != 1)
-		{
-			ft_putendl("Error");
-			return (0);
-		}
-		if (!(tab1 = (int*)malloc(sizeof(int) * ft_strlen(av[1]))))
-			return (0);
-		if (!(tab1 = str_to_tab(av[1], tab1, &len1)))
-			return (0);
-		if (check_duplicate(tab1, len1) != 1)
-		{
-			ft_putendl("Error");
-			return (0);
-		}
-	}
-	else if (nb > 2)
-	{
-		nb -= 1;
-		len1 = nb;
-		if (!(tab1 = (int*)malloc(sizeof(int) * nb)))
-			return (0);
-		if (!(tab1 = fill_tab(av, tab1, nb)))
-		{
-			ft_putendl("Error");
-			return (-1);
-		}
+		return (0);
 	}
 	while (get_next_line(0, &str) > 0)
 	{
-		check = 0;
-		if (ft_strcmp(str, "pa") == 0)
-		{
-			push(&tab1, &tab2, &len1, &len2);
-			check = 1;
-		}
-		if (ft_strcmp(str, "pb") == 0)
-		{
-			push(&tab2, &tab1, &len2, &len1);
-			check = 1;
-		}
-		if (ft_strcmp(str, "sa") == 0)
-		{
-			tab1 = swap(tab1, len1);
-			check = 1;
-		}
-		if (ft_strcmp(str, "sb") == 0)
-		{
-			tab2 = swap(tab2, len2);
-			check = 1;
-		}
-		if (ft_strcmp(str, "ra") == 0)
-		{
-			tab1 = rotate(tab1, len1);
-			check = 1;
-		}
-		if (ft_strcmp(str, "rb") == 0)
-		{
-			tab2 = rotate(tab2, len2);
-			check = 1;
-		}
-		if (ft_strcmp(str, "rr") == 0)
-		{
-			rr(&tab1, &tab2, len1, len2);
-			check = 1;
-		}
-		if (ft_strcmp(str, "rra") == 0)
-		{
-			tab1 = r_rotate(tab1, len1);
-			check = 1;
-		}
-		if (ft_strcmp(str, "rrb") == 0)
-		{
-			tab2 = r_rotate(tab2, len2);
-			check = 1;
-		}
-		if (ft_strcmp(str, "rrr") == 0)
-		{
-			rrr(&tab1, &tab2, len1, len2);
-			check = 1;
-		}
-		if (ft_strcmp(str, "sha") == 0)
-		{
-			ft_printf("%t", tab1, len1);
-			check = 1;
-		}
-		if (ft_strcmp(str, "shb") == 0)
-		{
-			ft_printf("%t", tab2, len2);
-			check = 1;
-		}
-		else if (check == 0)
+		if (parsing_first(stack, str) == 0 && parsing_second(stack, str) == 0)
 		{
 			ft_printf("Error\n");
 			return (0);
 		}
 		ft_strdel(&str);
 	}
-	checker_end(tab1, len1, len2);
+	checker_end(stack->tab_a, stack->size_a, stack->size_b);
 	return (0);
 }
