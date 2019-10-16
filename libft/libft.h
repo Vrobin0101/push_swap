@@ -6,7 +6,7 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 14:51:42 by spuisais          #+#    #+#             */
-/*   Updated: 2019/09/19 17:00:53 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/16 18:04:23 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,12 +125,17 @@ void				*ft_memalloc(size_t size);
 int					ft_printf(const char *format, ...);
 int					bol_nine(char *tmp);
 char				*edit_ret(char *buff, char *string, t_detail *detail);
+char				*edit_point(char *buff, char *string, t_detail *detail);
+char				*point_inf(char *buff, char *string, t_detail *detail);
+char				*point_sup(char **buff, char **string, int *i,
+				t_detail *detail);
 char				*nega(long double *f, long double *rest, long long int *a,
-		t_detail *detail);
+					t_detail *detail);
 void				clear_buff(char **buff, int *j, t_detail **detail);
+void				edit_precision(char **buff, char **string, t_detail **detail);
 void				parse_format(const char **format, va_list args, int *len);
-void				parse_flag(const char **format, va_list args,
-		t_detail **detail, int *len);
+void				parse_flag(const char **format, va_list args, t_detail **detail,
+				int *len);
 size_t				aff_char(va_list args, t_detail *detail, char *buff);
 size_t				aff_string(va_list args, t_detail *detail, char *buff);
 size_t				tab_i(va_list args, t_detail *detail, char *buff);
@@ -144,7 +149,9 @@ size_t				bin_conv(va_list args, t_detail *detail, char *buff);
 size_t				percent_conv(va_list args, t_detail *detail, char *buff);
 size_t				get_fct(const char *format, va_list args, t_detail *detail);
 size_t				aff_number(char *buff, char *string, t_detail *detail);
-int					get_next_line(int fd, char **line);
+size_t				ifc_null(char *buff, char *string, t_detail *detail);
+size_t				fix_stuffx(unsigned long long ll, char *buff, t_detail *detail);
+size_t				fix_stuffo(unsigned long long ll, char *buff, t_detail *detail);
 t_detail			*set_det(t_detail *detail);
 
 #endif

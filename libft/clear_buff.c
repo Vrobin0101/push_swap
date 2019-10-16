@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/12 05:00:26 by vrobin            #+#    #+#             */
-/*   Updated: 2019/06/18 05:39:54 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/16 18:01:05 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	clear_buff(char **buff, int *j, t_detail **detail)
 		(*DET)->overbuff = 1;
 		ft_putstr(*buff);
 		free(*buff);
-		*buff = ft_strnew(BUFF_SIZE);
+		if (!(*buff = ft_strnew(BUFF_SIZE)))
+			return ;
 		(*DET)->field -= *j;
 		*j = 0;
 	}

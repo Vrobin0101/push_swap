@@ -6,7 +6,7 @@
 #    By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/13 15:01:00 by spuisais          #+#    #+#              #
-#    Updated: 2019/09/09 16:29:26 by vrobin           ###   ########.fr        #
+#    Updated: 2019/10/16 18:06:17 by vrobin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,21 +81,23 @@ SRCS = ft_memset.c		\
 	   ft_high_sqrt.c	\
 	   ft_itoa_base.c	\
 	   ft_fritoa_base.c	\
-	   ft_strskip.c		\
-	   print_until.c	\
-	   ft_printf.c    \
-	   parse_format.c \
-	   parse_flag.c   \
-	   number_conv.c  \
-	   aff_number.c   \
-	   edit_ret.c     \
-	   csp_conv.c     \
-	   percent_conv.c \
-	   fill_float.c	 \
-	   check_float.c  \
-	   clear_buff.c	 \
 	   get_next_line.c \
-	   tab_i.c		 \
+	   ft_printf.c    \
+		  parse_format.c \
+		  parse_flag.c   \
+		  number_conv.c  \
+		  aff_number.c   \
+		  edit_ret.c     \
+		  csp_conv.c     \
+		  point.c		 \
+		  percent_conv.c \
+		  fill_float.c	 \
+		  check_float.c  \
+		  clear_buff.c	 \
+		  tab_i.c		 \
+		  fix_stuff.c	 \
+		  		ft_llutoa_base.c		\
+		ft_strnjoin.c	\
 
 OBJS = 	$(SRCS:.c=.o)
 

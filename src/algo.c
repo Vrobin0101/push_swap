@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/30 13:40:52 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/16 14:24:40 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/16 17:29:30 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void		algo(t_stack *stack, t_string *string, int size, int check)
 		return ;
 	p = check == 0 ? quickswap_a(stack, string, size, &rot)
 		: quickswap_b(stack, string, size, &rot);
-	if (stack->size_a != 2)
+	if (stack->size_a != 2 || stack->size_b != 2)
 		rotate_back(stack, string, rot, check);
 	if (size > 1)
 	{

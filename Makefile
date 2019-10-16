@@ -2,7 +2,7 @@ NAME1 = checker
 NAME2 = push_swap
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g3 -Wall -Wextra -Werror
 
 HEADERS = inc/checker.h
 
@@ -34,6 +34,7 @@ SOURCES2 = push_swap.c \
 		  three_sort.c \
 		  remove_instructions.c \
 		  quick_swap.c \
+		  test_ret.c \
 
 SRCS1 = $(addprefix $(SRC_PATH)/,$(SOURCES1))
 OBJS1 = $(addprefix $(OBJ_PATH)/,$(SOURCES1:.c=.o))
@@ -67,4 +68,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY = re fclean clean all
+.PHONY = make re fclean clean all

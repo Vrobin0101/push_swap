@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 15:29:20 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/16 14:28:12 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/16 18:46:56 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int		*str_to_tab(char *str, int *tab, int *len)
 	char	**split;
 	int		i;
 
+	if (!(tab = (int*)malloc(sizeof(int) * ft_strlen(str))))
+		return (NULL);
 	split = ft_strsplit(str, ' ');
 	i = 0;
 	while (split[i] != NULL)
 		i++;
 	*len = i;
-	if (!(tab = (int*)malloc(sizeof(int) * *len)) || !check_digits(str))
-		return (NULL);
 	i = 0;
 	while (i < *len)
 	{
@@ -57,11 +57,7 @@ int		*fill_tab(char **av, int *tab, int nb)
 void	convert_num(t_stack *stack, char **av, int nb)
 {
 	if (nb == 2)
-	{
-		if (!(stack->tab_a = (int*)malloc(sizeof(int) * stack->size_a)))
-			return ;
 		stack->tab_a = str_to_tab(av[1], stack->tab_a, &stack->size_a);
-	}
 	else if (nb > 2)
 	{
 		nb -= 1;

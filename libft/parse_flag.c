@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 11:24:57 by vrobin            #+#    #+#             */
-/*   Updated: 2019/06/18 05:40:50 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/16 18:00:46 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void		parse_zero(const char **format, va_list args, t_detail **detail,
 	if (**format == '0' && (*DET)->minus == 0)
 	{
 		++*format;
+		if (**format == '-')
+			parse_flag(format, args, detail, len);
 		if (**format == '+')
 		{
 			(*DET)->plus = 1;
@@ -59,8 +61,7 @@ void		parse_zero(const char **format, va_list args, t_detail **detail,
 	}
 }
 
-void		parse_conv(const char **format, va_list args, t_detail **detail,
-		int *len)
+void		parse_conv(const char **format, t_detail **detail)
 {
 	if (**format == 'h')
 	{
@@ -89,8 +90,7 @@ void		parse_conv(const char **format, va_list args, t_detail **detail,
 	}
 }
 
-void		parse_field(const char **format, va_list args, t_detail **detail,
-		int *len)
+void		parse_field(const char **format, t_detail **detail)
 {
 	int i;
 
@@ -120,7 +120,7 @@ void		parse_flag(const char **format, va_list args, t_detail **detail,
 		parse_flag(format, args, detail, len);
 	}
 	parse_zero(format, args, detail, len);
-	parse_field(format, args, detail, len);
+	parse_field(format, detail);
 	i = 0;
 	if (**format == '.')
 	{
@@ -134,5 +134,5 @@ void		parse_flag(const char **format, va_list args, t_detail **detail,
 		(*DET)->precision = i;
 		(*DET)->precision += (i == 0) ? -1 : 0;
 	}
-	parse_conv(format, args, detail, len);
+	parse_conv(format, detail);
 }

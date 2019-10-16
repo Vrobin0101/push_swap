@@ -1,38 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_format.c                                     :+:      :+:    :+:   */
+/*   ft_strnjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/21 12:19:27 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/16 18:01:21 by vrobin           ###   ########.fr       */
+/*   Created: 2019/08/15 04:05:04 by vrobin            #+#    #+#             */
+/*   Updated: 2019/08/26 19:43:14 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		parse_format(const char **format, va_list args, int *len)
+char	*ft_strnjoin(char const *s1, char const *s2, size_t n)
 {
-	int				i;
-	t_detail		*detail;
+	char	*cat;
+	size_t	catlen;
+	size_t	i;
+	size_t	j;
 
+	if (!s1 || !s2)
+		return (NULL);
+	catlen = ft_strlen(s1) + ft_strlen(s2);
 	i = 0;
-	++*format;
-	DET = NULL;
-	DET = set_det(DET);
-	if (**format)
+	if (!(cat = (char *)malloc(sizeof(char) * catlen + 1)))
+		return (NULL);
+	while (s1[i] != '\0')
 	{
-		parse_flag(format, args, &detail, len);
-		if (**format == ' ')
-		{
-			(DET)->space = 1;
-			++*format;
-			parse_flag(format, args, &detail, len);
-		}
-		if (ft_strchr("cspdiouxXfb%t", **format) != NULL || **format == '%')
-			*len = *len + get_fct(*format, args, DET);
-		else
-			free(DET);
+		cat[i] = s1[i];
+		i++;
 	}
+	j = 0;
+	while (s2[j] != '\0' && j < n)
+	{
+		cat[i + j] = s2[j];
+		j++;
+	}
+	cat[catlen] = '\0';
+	return (cat);
 }

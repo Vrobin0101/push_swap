@@ -6,19 +6,21 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/14 10:16:36 by vrobin            #+#    #+#             */
-/*   Updated: 2019/06/18 05:40:34 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/16 18:01:33 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int					ft_printf(const char *format, ...)
+int				ft_printf(const char *format, ...)
 {
 	va_list		args;
 	int			len;
 
 	len = 0;
 	va_start(args, format);
+	if (!format)
+		return (0);
 	if (ft_strcmp(format, "%") == 0)
 		return (0);
 	while (*format && format)
@@ -35,7 +37,7 @@ int					ft_printf(const char *format, ...)
 	return (len);
 }
 
-t_detail			*set_det(t_detail *detail)
+t_detail		*set_det(t_detail *detail)
 {
 	if (!(DET = malloc(sizeof(t_detail))))
 		return (NULL);
@@ -62,7 +64,7 @@ t_detail			*set_det(t_detail *detail)
 	return (detail);
 }
 
-size_t				go_fct(const char *format, char *buff, va_list args,
+size_t			go_fct(const char *format, char *buff, va_list args,
 		t_detail *detail)
 {
 	static size_t		(*ft[])(va_list args, t_detail *detail, char *buff) =
@@ -73,9 +75,10 @@ size_t				go_fct(const char *format, char *buff, va_list args,
 	int					len;
 	const char			*str;
 
+	len = 0;
 	str = "cspdiouxXfb%t";
-	i = 0;
-	while (i < 13)
+	i = -1;
+	while (++i < 13)
 	{
 		if (*format == str[i])
 		{
@@ -87,28 +90,29 @@ size_t				go_fct(const char *format, char *buff, va_list args,
 			len = (*ft[i])(args, DET, buff);
 			break ;
 		}
-		i++;
 	}
 	return (len);
 }
 
-size_t				get_fct(const char *format, va_list args, t_detail *detail)
+size_t			get_fct(const char *format, va_list args, t_detail *detail)
 {
 	int				len;
 	int				i;
 	char			*buff;
-	const char		*str;
 
 	if (!(buff = ft_strnew(BUFF_SIZE)))
 		return (0);
 	if (*format == '\0' || format == NULL)
 		return (0);
 	len = go_fct(format, buff, args, detail);
+	i = (DET)->len;
 	if ((DET)->overbuff)
 	{
 		if ((DET)->minus)
-			(DET)->len += len;
-		return ((DET)->len);
+			i += len;
+		free(DET);
+		return (i);
 	}
+	free(DET);
 	return (len);
 }
