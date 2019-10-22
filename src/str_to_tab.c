@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/15 15:29:20 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/16 18:46:56 by vrobin           ###   ########.fr       */
+/*   Created: 2019/10/22 11:50:36 by vrobin            #+#    #+#             */
+/*   Updated: 2019/10/22 13:38:46 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int		*str_to_tab(char *str, int *tab, int *len)
 	char	**split;
 	int		i;
 
-	if (!(tab = (int*)malloc(sizeof(int) * ft_strlen(str))))
-		return (NULL);
 	split = ft_strsplit(str, ' ');
+	if (split[0] == NULL || !(tab = (int*)malloc(sizeof(int) * ft_strlen(str))))
+		return (NULL);
 	i = 0;
 	while (split[i] != NULL)
 		i++;
@@ -30,8 +30,13 @@ int		*str_to_tab(char *str, int *tab, int *len)
 		tab[i] = ft_atoi(split[i]);
 		i++;
 	}
-	if (!check_duplicate(tab, *len))
-		return (NULL);
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
 	return (tab);
 }
 
@@ -40,22 +45,24 @@ int		*fill_tab(char **av, int *tab, int nb)
 	int i;
 
 	i = 0;
+	if (string_arguments(av, nb) == 0)
+	{
+		ft_putendl("/!/ WATCH OUT /!/");
+		ft_putendl("Only the first number of each argument will be taken");
+	}
 	while (i < nb)
 	{
-		if (ft_atoi(av[i + 1]) > INT_MAX || ft_atoi(av[i + 1]) < INT_MIN)
-			return (NULL);
 		tab[i] = ft_atoi(av[i + 1]);
-		if (!check_digits(av[i + 1]))
-			return (NULL);
 		i++;
 	}
-	if (!check_duplicate(tab, i))
-		return (NULL);
 	return (tab);
 }
 
 void	convert_num(t_stack *stack, char **av, int nb)
 {
+	int i;
+
+	i = 1;
 	if (nb == 2)
 		stack->tab_a = str_to_tab(av[1], stack->tab_a, &stack->size_a);
 	else if (nb > 2)
@@ -74,4 +81,12 @@ void	set_zero(t_stack *stack)
 	stack->size_a = 0;
 	stack->tab_b = NULL;
 	stack->size_b = 0;
+}
+
+void	free_check(t_stack *stack, char *str)
+{
+	free(stack->tab_a);
+	free(stack->tab_b);
+	free(stack);
+	free(str);
 }

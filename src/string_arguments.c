@@ -1,40 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bol_check.c                                        :+:      :+:    :+:   */
+/*   string_arguments.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/15 15:36:35 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/22 11:51:27 by vrobin           ###   ########.fr       */
+/*   Created: 2019/10/22 11:52:13 by vrobin            #+#    #+#             */
+/*   Updated: 2019/10/22 15:36:26 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/checker.h"
 
-int		bol_check(int *tab, int len, int check)
+int		string_arguments(char **av, int nb)
+{
+	int i;
+	int j;
+	int nbr;
+
+	i = 1;
+	j = 0;
+	nbr = 0;
+	while (i < nb + 1)
+	{
+		while (av[i][j])
+		{
+			if (av[i][j] >= '0' && av[i][j] <= '9' && (av[i][j + 1] == ' '
+						|| av[i][j + 1] == '\0'))
+				nbr++;
+			j++;
+		}
+		if (nbr > 1)
+			return (0);
+		nbr = 0;
+		i++;
+	}
+	return (1);
+}
+
+int		search_ret(char *str)
 {
 	int i;
 
 	i = 0;
-	if (check == 1)
+	while (str[i])
 	{
-		while (i < len - 1)
-		{
-			if (tab[i + 1] < tab[i])
-				return (0);
-			i++;
-		}
-		return (1);
+		if (str[i] == '\n' || str[1] == '\0')
+			return (1);
+		i++;
 	}
-	else
-	{
-		while (i < len - 1)
-		{
-			if (tab[i + 1] > tab[i])
-				return (0);
-			i++;
-		}
-		return (1);
-	}
+	return (0);
 }

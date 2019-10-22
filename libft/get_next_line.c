@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 16:26:31 by vrobin            #+#    #+#             */
-/*   Updated: 2019/09/09 16:57:08 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/22 15:36:06 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,6 @@ int				get_next_line(int fd, char **line)
 	filedata->reste = ft_half(&str);
 	*line = ft_strdup(str);
 	free(str);
-	i = (i > 0 || ft_strlen(*line) > 0) ? 1 : 0;
+	i = (i > 0 || ft_strchr(str, '\n') == 0 || ft_strlen(*line) > 0) ? 1 : 0;
 	return (i);
 }

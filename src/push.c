@@ -5,37 +5,45 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/13 02:46:07 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/16 09:08:48 by vrobin           ###   ########.fr       */
+/*   Created: 2019/10/22 09:09:49 by vrobin            #+#    #+#             */
+/*   Updated: 2019/10/22 13:38:44 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/checker.h"
 
+void	move_one(int **src, int *len_src)
+{
+	int i;
+
+	i = 0;
+	while (i < *len_src)
+	{
+		src[0][i] = src[0][i + 1];
+		i++;
+	}
+	*len_src -= 1;
+}
+
 void	push(int **dst, int **src, int *len_dst, int *len_src)
 {
-	int	*new_dst;
-	int	i;
 	int j;
+	int nb;
+	int i;
 
 	j = 0;
 	i = 0;
 	if (*len_src > 0)
 	{
-		if (!(new_dst = (int*)malloc(sizeof(int) * (*len_dst + 2))))
-			return ;
-		new_dst[*len_dst + 1] = '\0';
-		new_dst[i] = *src[i];
-		i++;
-		while (j < *len_dst)
+		nb = src[0][0];
+		while (j < *len_dst + 1)
 		{
-			new_dst[i] = dst[0][j];
-			i++;
+			i = dst[0][j];
+			dst[0][j] = nb;
+			nb = i;
 			j++;
 		}
-		++*src;
-		*len_src -= 1;
+		move_one(src, len_src);
 		*len_dst += 1;
-		*dst = new_dst;
 	}
 }

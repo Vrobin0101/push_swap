@@ -6,7 +6,7 @@
 #    By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/13 15:01:00 by spuisais          #+#    #+#              #
-#    Updated: 2019/10/16 18:06:17 by vrobin           ###   ########.fr        #
+#    Updated: 2019/10/22 08:00:24 by vrobin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,6 +98,7 @@ SRCS = ft_memset.c		\
 		  fix_stuff.c	 \
 		  		ft_llutoa_base.c		\
 		ft_strnjoin.c	\
+		print_until.c	\
 
 OBJS = 	$(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 02:40:15 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/16 16:41:49 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/22 15:24:29 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void			check_end(int *tab, int len1, int len2);
 void			string_push_back(t_string *src, t_string *to_add);
 void			free_string(t_string *to_delete);
 void			string_remove(t_string *src, size_t index);
+void			free_all(t_stack *stack, t_string *string);
+void			free_check(t_stack *stack, char *str);
 void			string_clear(t_string *to_clear);
 void			print_string(t_string *src);
 void			push(int **dst, int **src, int *len_dst, int *len_src);
@@ -63,6 +65,9 @@ int				*rotate(int *tab, int len);
 int				*r_rotate(int *tab, int len);
 int				*str_to_tab(char *str, int *tab, int *len);
 int				*fill_tab(char **av, int *tab, int nb);
+int				check_multiples_digits(char **av, int nb);
+int				string_arguments(char **av, int nb);
+int				search_ret(char *str);
 
 t_string		create_string(char *p_s);
 t_string		*initialize_string(char *p_s);
