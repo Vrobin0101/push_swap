@@ -6,11 +6,24 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 11:50:36 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/22 13:38:46 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/23 16:58:48 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/checker.h"
+
+void	free_split(char **split)
+{
+	int i;
+
+	i = 0;
+	while (split[i] != NULL)
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
+}
 
 int		*str_to_tab(char *str, int *tab, int *len)
 {
@@ -18,7 +31,7 @@ int		*str_to_tab(char *str, int *tab, int *len)
 	int		i;
 
 	split = ft_strsplit(str, ' ');
-	if (split[0] == NULL || !(tab = (int*)malloc(sizeof(int) * ft_strlen(str))))
+	if (!(tab = (int*)malloc(sizeof(int) * ft_strlen(str))))
 		return (NULL);
 	i = 0;
 	while (split[i] != NULL)
@@ -30,13 +43,7 @@ int		*str_to_tab(char *str, int *tab, int *len)
 		tab[i] = ft_atoi(split[i]);
 		i++;
 	}
-	i = 0;
-	while (split[i])
-	{
-		free(split[i]);
-		i++;
-	}
-	free(split);
+	free_split(split);
 	return (tab);
 }
 
@@ -73,14 +80,6 @@ void	convert_num(t_stack *stack, char **av, int nb)
 			return ;
 		stack->tab_a = fill_tab(av, stack->tab_a, nb);
 	}
-}
-
-void	set_zero(t_stack *stack)
-{
-	stack->tab_a = NULL;
-	stack->size_a = 0;
-	stack->tab_b = NULL;
-	stack->size_b = 0;
 }
 
 void	free_check(t_stack *stack, char *str)

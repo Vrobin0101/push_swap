@@ -6,7 +6,7 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 14:51:42 by spuisais          #+#    #+#             */
-/*   Updated: 2019/10/22 07:59:46 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/23 08:51:43 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,10 +132,11 @@ char				*point_sup(char **buff, char **string, int *i,
 char				*nega(long double *f, long double *rest, long long int *a,
 		t_detail *detail);
 void				clear_buff(char **buff, int *j, t_detail **detail);
-void				edit_precision(char **buff, char **string, t_detail **detail);
+void				edit_precision(char **buff, char **string,
+		t_detail **detail);
 void				parse_format(const char **format, va_list args, int *len);
-void				parse_flag(const char **format, va_list args, t_detail **detail,
-		int *len);
+void				parse_flag(const char **format, va_list args,
+		t_detail **detail, int *len);
 size_t				aff_char(va_list args, t_detail *detail, char *buff);
 size_t				aff_string(va_list args, t_detail *detail, char *buff);
 size_t				tab_i(va_list args, t_detail *detail, char *buff);
@@ -150,8 +151,10 @@ size_t				percent_conv(va_list args, t_detail *detail, char *buff);
 size_t				get_fct(const char *format, va_list args, t_detail *detail);
 size_t				aff_number(char *buff, char *string, t_detail *detail);
 size_t				ifc_null(char *buff, char *string, t_detail *detail);
-size_t				fix_stuffx(unsigned long long ll, char *buff, t_detail *detail);
-size_t				fix_stuffo(unsigned long long ll, char *buff, t_detail *detail);
+size_t				fix_stuffx(unsigned long long ll, char *buff,
+		t_detail *detail);
+size_t				fix_stuffo(unsigned long long ll, char *buff, t_detail
+		*detail);
 t_detail			*set_det(t_detail *detail);
 char				*ft_llutoa_base(unsigned long long value, char *base);
 char				*ft_strnjoin(char const *s1, char const *s2, size_t n);

@@ -19,6 +19,7 @@ SOURCES1 = checker.c \
 		  str_to_tab.c\
 		  quick_sort.c \
 		  string_arguments.c \
+		  bol_set.c \
 
 SOURCES2 = push_swap.c \
 		  push.c \
@@ -30,8 +31,8 @@ SOURCES2 = push_swap.c \
 		  str_to_tab.c\
 		  string_stuff.c\
 		  algo.c \
-		  bol_check.c \
 		  quick_sort.c \
+		  bol_set.c \
 		  three_sort.c \
 		  remove_instructions.c \
 		  quick_swap.c \
@@ -47,17 +48,17 @@ OBJS2 = $(addprefix $(OBJ_PATH)/,$(SOURCES2:.c=.o))
 all : $(NAME1)
 
 $(NAME1) : $(NAME2)
-	@make -C libft/
 	@$(CC) $(OBJS1) $(LIB_PATH) -o $(NAME1)
-	@echo "Compilation $(NAME1) OK"
+	@echo "\033[1mCompilation \033[1;35mCHECKER   : \033[;32m[COMPLETE]\033[0m"
 
 $(NAME2) : $(OBJS2) $(OBJS1)
 	@make -C libft/
 	@$(CC) $(OBJS2) $(LIB_PATH) -o $(NAME2)
-	@echo "Compilation $(NAME2) OK"
+	@echo "\033[1mCompilation \033[1;35mPUSH_SWAP : \033[;32m[COMPLETE]\033[0m"
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(HEADERS)
 	@mkdir -p obj
+	@printf "\033[1mCompiling \033[0;36m$(basename $(notdir $@))\033[0m\n" ;
 	@$(CC) $(CFLAGS) -o $@ -c $<
 
 clean :

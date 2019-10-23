@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 15:36:35 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/22 11:51:27 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/23 16:49:50 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,12 @@ int		bol_check(int *tab, int len, int check)
 		}
 		return (1);
 	}
+}
+
+void	set_zero(t_stack *stack)
+{
+	stack->tab_a = NULL;
+	stack->size_a = 0;
+	stack->tab_b = NULL;
+	stack->size_b = 0;
 }

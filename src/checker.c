@@ -6,20 +6,19 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 02:54:49 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/22 15:40:55 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/23 16:49:14 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/checker.h"
 
-void	checker_end(t_stack *stack, char *str)
+void	checker_end(t_stack *stack)
 {
 	int i;
 
 	i = 0;
 	if (stack->size_b)
 	{
-		free_check(stack, str);
 		ft_putendl("KO");
 		return ;
 	}
@@ -27,13 +26,11 @@ void	checker_end(t_stack *stack, char *str)
 	{
 		if (stack->tab_a[i + 1] < stack->tab_a[i])
 		{
-			free_check(stack, str);
 			ft_putendl("KO");
 			return ;
 		}
 		i++;
 	}
-	free_check(stack, str);
 	ft_putendl("OK");
 }
 
@@ -42,11 +39,6 @@ int		behavior_check(t_stack *stack)
 	if (stack->tab_a == NULL)
 	{
 		ft_printf("Error\n");
-		free(stack);
-		return (0);
-	}
-	if (stack->size_a == 1)
-	{
 		free(stack);
 		return (0);
 	}
@@ -97,23 +89,34 @@ int		parsing_second(t_stack *stack, char *str)
 
 int		main(int nb, char **av)
 {
-	t_stack *stack;
-	char	*str;
+	t_stack		*stack;
+	char		*str;
+	int			check;
 
+	check = 0;
 	if (nb == 1 || !(stack = (t_stack*)malloc(sizeof(t_stack))))
 		return (0);
 	set_zero(stack);
 	convert_num(stack, av, nb);
 	if (nb > 1 && check_multiples_digits(av, nb) == 0)
+	{
+		free(stack->tab_a);
+		free(stack);
 		return (0);
+	}
 	if (!(stack->tab_b = (int*)malloc(sizeof(int) * stack->size_a)) ||
 			check_duplicate(stack->tab_a, stack->size_a) == 0
 			|| !behavior_check(stack))
+	{
+		free(stack->tab_a);
+		free(stack->tab_b);
+		free(stack);
 		return (0);
-	while (get_next_line(0, &str) > 0)
+	}
+	while ((check = get_next_line(0, &str)) > 0)
 	{
 		if (ft_strcmp(str, "") == 0)
-			break;
+			break ;
 		if (parsing_first(stack, str) == 0 && parsing_second(stack, str) == 0)
 		{
 			ft_printf("Error\n");
@@ -122,6 +125,10 @@ int		main(int nb, char **av)
 		}
 		ft_strdel(&str);
 	}
-	checker_end(stack, str);
+	if (check != -2)
+		checker_end(stack);
+	else
+		ft_putendl("Error");
+	free_check(stack, str);
 	return (0);
 }

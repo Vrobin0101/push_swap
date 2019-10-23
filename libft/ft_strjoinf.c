@@ -6,7 +6,7 @@
 /*   By: spuisais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/03 17:12:53 by spuisais          #+#    #+#             */
-/*   Updated: 2019/09/09 16:26:02 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/23 09:04:57 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	*ft_strjoinf(char **s1, char **s2, int k)
 		i = ft_strlen(*s1) + ft_strlen(*s2);
 		if (!(str = (char *)malloc(sizeof(char) * (i + 1))))
 			return (NULL);
+		str[i] = '\0';
 		ft_strcpy(str, *s1);
 		ft_strcat(str, *s2);
 		if (k == 1)

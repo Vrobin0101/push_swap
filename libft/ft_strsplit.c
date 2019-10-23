@@ -6,7 +6,7 @@
 /*   By: spuisais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 11:50:40 by spuisais          #+#    #+#             */
-/*   Updated: 2019/09/09 11:20:35 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/23 13:52:08 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,20 @@ static int		ft_countwords(char const *str, char c)
 {
 	int i;
 	int count;
+	int can_find_word;
 
 	i = 0;
 	count = 0;
+	can_find_word = 1;
 	while (str[i] != '\0')
 	{
-		if (i == 0)
-			if (str[i] != c)
-				count++;
-		if (str[i] == c)
-			if (str[i + 1] != c)
-				count++;
+		if (can_find_word == 1 && str[i] != c)
+		{
+			count++;
+			can_find_word = 0;
+		}
+		if (can_find_word == 0 && str[i] == c)
+			can_find_word = 1;
 		i++;
 	}
 	return (count);
@@ -102,6 +105,7 @@ char			**ft_strsplit(char const *s, char c)
 	words = ft_countwords(s, c);
 	if (!(array = (char**)malloc(sizeof(char*) * (words + 1))))
 		return (NULL);
+	array[words] = NULL;
 	while (k < words)
 	{
 		if (!(array[k] = (char*)malloc(sizeof(char) *

@@ -3,20 +3,23 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+         #
+#    By: vrobin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/11/13 15:01:00 by spuisais          #+#    #+#              #
-#    Updated: 2019/10/22 08:00:24 by vrobin           ###   ########.fr        #
+#    Created: 2019/10/23 09:13:58 by vrobin            #+#    #+#              #
+#    Updated: 2019/10/23 10:12:17 by vrobin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = @gcc
+CC = gcc
 
-CFLAGS =
+CFLAGS = -Wall -Wextra -Werror
 
 HEADERS = libft.h
 
-SRCS = ft_memset.c		\
+OBJ_PATH = obj
+SRC_PATH = .
+
+SOURCES = ft_memset.c		\
 	   ft_bzero.c		\
 	   ft_memcpy.c		\
 	   ft_memccpy.c		\
@@ -96,11 +99,12 @@ SRCS = ft_memset.c		\
 		  clear_buff.c	 \
 		  tab_i.c		 \
 		  fix_stuff.c	 \
-		  		ft_llutoa_base.c		\
+		ft_llutoa_base.c		\
 		ft_strnjoin.c	\
 		print_until.c	\
 
-OBJS = 	$(SRCS:.c=.o)
+SRCS = $(addprefix $(SOURCES))
+OBJS = $(addprefix $(OBJ_PATH)/,$(SOURCES:.c=.o))
 
 NAME = libft.a
 
@@ -110,8 +114,13 @@ $(NAME) : $(OBJS)
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
 
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(HEADERS)
+	@mkdir -p obj
+	@printf "\033[1mCompiling \033[0;36m$(basename $(notdir $@))\033[0m\n" ;
+	@$(CC) $(CFLAGS) -o $@ -c $<
+
 clean :
-	@rm -rf *.o
+	@rm -rf obj
 
 fclean : clean
 	@rm -rf $(NAME)

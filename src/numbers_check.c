@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 15:28:34 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/22 12:39:11 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/23 16:58:29 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,21 @@
 int		check_digits(char *str)
 {
 	int i;
+	int check;
 
 	i = 0;
+	check = 0;
 	if (str[i] == '\0')
 		return (0);
 	while (str[i])
 	{
+		if (ft_isdigit(str[i]))
+			check = 1;
 		if (!ft_isdigit(str[i]) && str[i] != ' ')
 			return (0);
 		i++;
 	}
-	return (1);
+	return (check);
 }
 
 int		check_duplicate(int *tab, int len)
