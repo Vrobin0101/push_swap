@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 02:54:49 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/23 16:49:14 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/26 12:12:47 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,6 @@ void	checker_end(t_stack *stack)
 		i++;
 	}
 	ft_putendl("OK");
-}
-
-int		behavior_check(t_stack *stack)
-{
-	if (stack->tab_a == NULL)
-	{
-		ft_printf("Error\n");
-		free(stack);
-		return (0);
-	}
-	return (1);
 }
 
 int		parsing_first(t_stack *stack, char *str)
@@ -87,32 +76,12 @@ int		parsing_second(t_stack *stack, char *str)
 	return (1);
 }
 
-int		main(int nb, char **av)
+void	check_gnl(t_stack *stack)
 {
-	t_stack		*stack;
-	char		*str;
-	int			check;
+	int		check;
+	char	*str;
 
 	check = 0;
-	if (nb == 1 || !(stack = (t_stack*)malloc(sizeof(t_stack))))
-		return (0);
-	set_zero(stack);
-	convert_num(stack, av, nb);
-	if (nb > 1 && check_multiples_digits(av, nb) == 0)
-	{
-		free(stack->tab_a);
-		free(stack);
-		return (0);
-	}
-	if (!(stack->tab_b = (int*)malloc(sizeof(int) * stack->size_a)) ||
-			check_duplicate(stack->tab_a, stack->size_a) == 0
-			|| !behavior_check(stack))
-	{
-		free(stack->tab_a);
-		free(stack->tab_b);
-		free(stack);
-		return (0);
-	}
 	while ((check = get_next_line(0, &str)) > 0)
 	{
 		if (ft_strcmp(str, "") == 0)
@@ -121,7 +90,7 @@ int		main(int nb, char **av)
 		{
 			ft_printf("Error\n");
 			free_check(stack, str);
-			return (0);
+			return ;
 		}
 		ft_strdel(&str);
 	}
@@ -130,5 +99,31 @@ int		main(int nb, char **av)
 	else
 		ft_putendl("Error");
 	free_check(stack, str);
+}
+
+int		main(int nb, char **av)
+{
+	t_stack		*stack;
+
+	if (nb == 1 || !(stack = (t_stack*)malloc(sizeof(t_stack))))
+		return (1);
+	set_zero(stack);
+	convert_num(stack, av, nb);
+	if (nb > 1 && check_multiples_digits(av, nb) == 0)
+	{
+		free(stack->tab_a);
+		free(stack);
+		return (2);
+	}
+	if (!(stack->tab_b = (int*)malloc(sizeof(int) * stack->size_a)) ||
+			check_duplicate(stack->tab_a, stack->size_a) == 0
+			|| !behavior_check(stack))
+	{
+		free(stack->tab_a);
+		free(stack->tab_b);
+		free(stack);
+		return (3);
+	}
+	check_gnl(stack);
 	return (0);
 }

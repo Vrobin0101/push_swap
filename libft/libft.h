@@ -6,7 +6,7 @@
 /*   By: spuisais <spuisais@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 14:51:42 by spuisais          #+#    #+#             */
-/*   Updated: 2019/10/23 08:51:43 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/26 10:33:08 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/uio.h>
-# define BUFF_SIZE 500
+# define BUFF_SIZE 524
 # define DET detail
 
 typedef struct		s_detail

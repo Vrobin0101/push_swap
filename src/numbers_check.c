@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 15:28:34 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/25 06:18:56 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/26 11:25:11 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,14 @@ int		check_digits(char *str)
 		return (0);
 	while (str[i])
 	{
-		if (ft_isdigit(str[i]))
+		if (str[i] == '+' || str[i] == '-')
+		{
+			if (i != 0 && str[i - 1] != ' ')
+				return (0);
+			if (str[i + 1] < '0' || str[i + 1] > '9')
+				return (0);
+		}
+		if (ft_isdigit(str[i]) && str[i] != '+' && str[i] != '-')
 			check = 1;
 		if (!ft_isdigit(str[i]) && str[i] != ' ')
 			return (0);
@@ -69,6 +76,17 @@ int		check_multiples_digits(char **av, int nb)
 			return (0);
 		}
 		i++;
+	}
+	return (1);
+}
+
+int		behavior_check(t_stack *stack)
+{
+	if (stack->tab_a == NULL)
+	{
+		ft_printf("Error\n");
+		free(stack);
+		return (0);
 	}
 	return (1);
 }

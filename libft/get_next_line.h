@@ -6,7 +6,7 @@
 /*   By: spuisais <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/29 15:28:35 by spuisais          #+#    #+#             */
-/*   Updated: 2019/09/09 16:33:44 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/26 11:42:54 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct		s_tile
 	struct s_tile	*next;
 }					t_tile;
 
+int					check_next(char *str);
 int					get_next_line(const int fd, char **line);
 
 #endif

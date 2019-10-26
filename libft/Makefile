@@ -6,7 +6,7 @@
 #    By: vrobin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/23 09:13:58 by vrobin            #+#    #+#              #
-#    Updated: 2019/10/23 10:12:17 by vrobin           ###   ########.fr        #
+#    Updated: 2019/10/26 11:43:21 by vrobin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,6 +102,7 @@ SOURCES = ft_memset.c		\
 		ft_llutoa_base.c		\
 		ft_strnjoin.c	\
 		print_until.c	\
+		check_next.c \
 
 SRCS = $(addprefix $(SOURCES))
 OBJS = $(addprefix $(OBJ_PATH)/,$(SOURCES:.c=.o))
