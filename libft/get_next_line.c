@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/09 16:26:31 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/26 11:43:22 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/29 14:26:08 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ int				end_gnl(t_file *filedata, char *str, char *buffer, char **line)
 	i = (ft_strchr(str, '\n') == 0 && (i > 0 || ft_strlen(*line) > 0)) ? 1 : 0;
 	if (check_next(str) == 0)
 	{
-		free(filedata);
 		free(filedata->reste);
+		free(filedata);
 		if (ft_strcmp(buffer, "\n\0") == 0)
 		{
 			free(str);

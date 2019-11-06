@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 15:33:44 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/16 15:07:37 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/29 15:03:12 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ void	show_tab(int *tab, int len, int d)
 void	show_all(int *tab1, int *tab2, int len1, int len2)
 {
 	show_tab(tab1, len1, 1);
-	ft_putchar('\n');
-	show_tab(tab2, len2, 2);
+	show_tab(tab2, len2, 0);
 }

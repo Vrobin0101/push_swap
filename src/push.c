@@ -6,7 +6,7 @@
 /*   By: vrobin <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 09:09:49 by vrobin            #+#    #+#             */
-/*   Updated: 2019/10/22 13:38:44 by vrobin           ###   ########.fr       */
+/*   Updated: 2019/10/29 14:26:18 by vrobin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	move_one(int **src, int *len_src)
 	int i;
 
 	i = 0;
-	while (i < *len_src)
+	while (i < *len_src -1)
 	{
 		src[0][i] = src[0][i + 1];
 		i++;
